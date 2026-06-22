@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign In — Stackly</title>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0418;--surface:#1a0d33;--surface2:#241048;--magenta:#ff2bd6;--violet:#7a2bff;--cyan:#00e5ff;--text:#f6f0ff;--muted:#a59bc4;--grad:linear-gradient(135deg,#ff2bd6,#7a2bff 55%,#00e5ff)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden}
+body::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,43,214,.25),transparent 70%);top:-200px;left:-200px;animation:float 8s ease-in-out infinite}
+body::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.22),transparent 70%);bottom:-200px;right:-200px;animation:float 10s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}
+h1,h2{font-family:'Audiowide';font-weight:400}
+a{color:var(--cyan);text-decoration:none}
+.grad{background:var(--grad);-webkit-background-clip:text;color:transparent}
+
+.shell{width:100%;max-width:920px;display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid rgba(255,43,214,.2);border-radius:24px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);position:relative;z-index:1}
+.brand{padding:50px 40px;background:linear-gradient(135deg,rgba(255,43,214,.18),rgba(0,229,255,.12));display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.brand::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900') center/cover;opacity:.18;mix-blend-mode:overlay}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Audiowide';font-size:20px;position:relative;z-index:1}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:var(--grad);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,43,214,.5)} .logo-mark i{color:#fff;font-size:18px}
+.logo span{background:var(--grad);-webkit-background-clip:text;color:transparent}
+.brand h2{font-size:30px;margin-bottom:14px;position:relative;z-index:1;line-height:1.2}
+.brand p{color:#e8defc;font-size:14px;position:relative;z-index:1}
+.brand .bullets{margin-top:20px;list-style:none;position:relative;z-index:1}
+.brand .bullets li{padding:8px 0;color:#cfc4ea;font-size:13.5px;display:flex;gap:10px}
+.brand .bullets i{color:var(--cyan)}
+
+.form-side{padding:50px 40px}
+.form-side h1{font-size:28px;margin-bottom:8px;color:#fff}
+.form-side>p{color:var(--muted);font-size:14px;margin-bottom:26px}
+.field{margin-bottom:16px}
+.field label{display:block;color:#e8defc;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;font-weight:600}
+.field input{width:100%;padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(10,4,24,.5);color:#fff;font-family:inherit;font-size:14px;outline:none;transition:.3s}
+.field input:focus{border-color:var(--magenta);box-shadow:0 0 0 3px rgba(255,43,214,.15)}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:18px;color:var(--muted)}
+.row label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.btn{width:100%;padding:14px;border-radius:30px;border:none;background:var(--grad);color:#fff;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit;box-shadow:0 12px 30px rgba(255,43,214,.4);transition:.3s}
+.btn:hover{transform:translateY(-3px)}
+.divider{text-align:center;margin:22px 0;color:var(--muted);font-size:12px;position:relative}
+.divider::before,.divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:rgba(255,255,255,.1)}
+.divider::before{left:0}.divider::after{right:0}
+.socials{display:flex;gap:10px}
+.socials button{flex:1;padding:11px;border-radius:12px;background:rgba(10,4,24,.5);border:1px solid rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:14px;transition:.3s}
+.socials button:hover{border-color:var(--cyan);color:var(--cyan)}
+.alt{text-align:center;margin-top:22px;font-size:13.5px;color:var(--muted)}
+
+@media(max-width:760px){.shell{grid-template-columns:1fr}.brand{padding:30px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="brand">
+    <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-music"></i></span><span>STACKLY</span></a>
+    <div>
+      <h2>Welcome <span class="grad">Back to the Stage</span></h2>
+      <p>Sign in to manage your shows, tickets and tour calendar.</p>
+      <ul class="bullets">
+        <li><i class="fa-solid fa-circle-check"></i> Live show dashboard</li>
+        <li><i class="fa-solid fa-circle-check"></i> Real-time stream analytics</li>
+        <li><i class="fa-solid fa-circle-check"></i> Artist & venue messaging</li>
+      </ul>
+    </div>
+    <p style="font-size:12px;color:#cfc4ea;position:relative;z-index:1">© 2026 Stackly Music & Entertainment</p>
+  </div>
+  <div class="form-side">
+    <h1>Sign <span class="grad">In</span></h1>
+    <p>Access your Stackly account.</p>
+    <form id="lf">
+      <div class="field"><label>Email</label><input type="email" required placeholder="you@email.com"></div>
+      <div class="field"><label>Password</label><input type="password" required placeholder="••••••••"></div>
+      <div class="row">
+        <label><input type="checkbox"> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button class="btn">Sign In <i class="fa-solid fa-arrow-right"></i></button>
+      <div class="divider">OR CONTINUE WITH</div>
+      <div class="socials">
+        <button type="button"><i class="fa-brands fa-google"></i></button>
+        <button type="button"><i class="fa-brands fa-apple"></i></button>
+        <button type="button"><i class="fa-brands fa-spotify"></i></button>
+      </div>
+      <p class="alt">New to Stackly? <a href="signup.html">Create an account</a></p>
+    </form>
+  </div>
+</div>
+<script>
+document.getElementById('lf').addEventListener('submit',e=>{e.preventDefault();window.location='customer-dashboard.html'});
+</script>
+</body>
+</html>

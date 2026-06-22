@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 — Off Stage · Stackly</title>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0418;--magenta:#ff2bd6;--violet:#7a2bff;--cyan:#00e5ff;--muted:#a59bc4;--grad:linear-gradient(135deg,#ff2bd6,#7a2bff 55%,#00e5ff)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#f6f0ff;min-height:100vh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden;text-align:center}
+body::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,43,214,.3),transparent 70%);top:-200px;left:-200px;animation:float 8s ease-in-out infinite}
+body::after{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.25),transparent 70%);bottom:-200px;right:-200px;animation:float 10s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}
+h1{font-family:'Audiowide';font-size:clamp(110px,22vw,260px);background:var(--grad);-webkit-background-clip:text;color:transparent;line-height:1;margin-bottom:10px;letter-spacing:4px}
+.eyebrow{color:var(--cyan);letter-spacing:5px;font-size:12px;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+h2{font-family:'Audiowide';font-size:clamp(24px,4vw,38px);margin-bottom:14px;color:#fff;font-weight:400}
+p{color:var(--muted);margin-bottom:30px;max-width:480px;margin-left:auto;margin-right:auto}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;border-radius:30px;font-weight:600;font-size:13px;border:none;cursor:pointer;font-family:inherit;letter-spacing:1px;text-transform:uppercase;background:var(--grad);color:#fff;box-shadow:0 12px 30px rgba(255,43,214,.4);text-decoration:none;transition:.3s}
+.btn:hover{transform:translateY(-3px)}
+.eq{display:flex;gap:6px;justify-content:center;height:80px;align-items:flex-end;margin:20px 0 30px}
+.eq span{width:8px;background:var(--grad);border-radius:4px 4px 0 0;animation:eq 1.2s ease-in-out infinite}
+@keyframes eq{0%,100%{height:15%}50%{height:90%}}
+.box{position:relative;z-index:1}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="eyebrow">Off Stage</div>
+  <h1>404</h1>
+  <div class="eq" id="eq"></div>
+  <h2>This Track Doesn't Exist</h2>
+  <p>The page you're looking for wandered off after the encore. Let's get you back to the main stage.</p>
+  <a href="index.html" class="btn"><i class="fa-solid fa-house"></i> Back to Home</a>
+</div>
+<script>
+const eq=document.getElementById('eq');
+for(let i=0;i<14;i++){const s=document.createElement('span');s.style.animationDelay=(Math.random()*1.2)+'s';s.style.height=(Math.random()*70+20)+'%';eq.appendChild(s)}
+</script>
+</body>
+</html>

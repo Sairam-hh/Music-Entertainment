@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard — Stackly</title>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0418;--bg2:#14082a;--surface:#1a0d33;--surface2:#241048;--magenta:#ff2bd6;--violet:#7a2bff;--cyan:#00e5ff;--gold:#ffd166;--text:#f6f0ff;--muted:#a59bc4;--grad:linear-gradient(135deg,#ff2bd6,#7a2bff 55%,#00e5ff)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;display:grid;grid-template-columns:260px 1fr}
+h1,h2,h3,h4{font-family:'Audiowide';font-weight:400}
+a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+.grad{background:var(--grad);-webkit-background-clip:text;color:transparent}
+
+.side{background:linear-gradient(180deg,#0e0524,#06020f);border-right:1px solid rgba(255,43,214,.12);padding:24px 18px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Audiowide';font-size:18px;margin-bottom:30px;padding:0 6px}
+.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--grad);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,43,214,.5)} .logo-mark i{color:#fff;font-size:15px}
+.logo span{background:var(--grad);-webkit-background-clip:text;color:transparent}
+.role{background:linear-gradient(135deg,rgba(255,209,102,.15),rgba(255,43,214,.1));border:1px solid rgba(255,209,102,.3);padding:14px;border-radius:14px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.role .av{width:42px;height:42px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:700}
+.role h5{color:#fff;font-family:'Inter';font-size:13px;font-weight:600}
+.role span{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1.5px}
+.nav-title{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:2px;padding:18px 12px 8px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:#cfc4ea;font-size:14px;cursor:pointer;transition:.25s;margin-bottom:3px}
+.nav-item i{width:18px;color:var(--muted)}
+.nav-item:hover{background:rgba(255,209,102,.08);color:#fff}
+.nav-item.active{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(255,43,214,.3)}
+.nav-item.active i{color:#fff}
+
+.main{padding:24px 30px;overflow-y:auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:14px}
+.topbar h1{font-size:26px;color:#fff}
+.topbar h1 small{display:block;font-family:'Inter';color:var(--muted);font-size:13px;font-weight:400;margin-top:4px}
+.tools{display:flex;gap:10px}
+.icon-btn{width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid rgba(255,255,255,.1);color:#fff;display:grid;place-items:center;cursor:pointer;position:relative}
+.icon-btn .dot{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--magenta);box-shadow:0 0 8px var(--magenta)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px}
+.stat{background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid rgba(255,209,102,.15);border-radius:18px;padding:22px;transition:.4s;position:relative;overflow:hidden}
+.stat:hover{transform:translateY(-5px);border-color:var(--gold)}
+.stat::after{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:var(--grad);opacity:.07}
+.stat .ico{width:42px;height:42px;border-radius:11px;background:var(--grad);color:#fff;display:grid;place-items:center;margin-bottom:14px;font-size:17px}
+.stat .num{font-family:'Audiowide';font-size:26px;color:#fff;line-height:1}
+.stat .lbl{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-top:6px}
+.stat .delta{font-size:11px;color:var(--cyan);margin-top:8px;font-weight:600}
+
+.grid-2{display:grid;grid-template-columns:1.6fr 1fr;gap:22px;margin-bottom:28px}
+.panel{background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid rgba(255,43,214,.12);border-radius:18px;padding:24px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.panel-head h3{color:#fff;font-size:17px}
+
+/* Live stream chart */
+.live-chart{height:220px;position:relative;padding-top:20px}
+.live-chart svg{width:100%;height:100%}
+
+/* world map dots */
+.world{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.city{background:rgba(10,4,24,.4);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.city .l{display:flex;gap:10px;align-items:center;color:#fff;font-size:13.5px;font-weight:600}
+.city .l i{color:var(--cyan)}
+.city .v{font-family:'Audiowide';color:var(--magenta);font-size:15px}
+
+/* users table */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);font-weight:600}
+.tbl td{padding:14px;border-bottom:1px dashed rgba(255,255,255,.06);color:#e8defc;font-size:13.5px}
+.tbl tr:hover td{background:rgba(255,209,102,.05)}
+.tbl .name{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600}
+.tbl .name img{width:34px;height:34px;border-radius:50%}
+.role-pill{font-size:10.5px;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.role-pill.c{background:rgba(255,43,214,.18);color:var(--magenta)}
+.role-pill.a{background:rgba(0,229,255,.18);color:var(--cyan)}
+.role-pill.x{background:rgba(255,209,102,.2);color:var(--gold)}
+
+/* alerts */
+.alert{display:flex;gap:12px;padding:14px;background:rgba(10,4,24,.4);border-radius:12px;border:1px solid rgba(255,255,255,.05);margin-bottom:10px}
+.alert .a-ico{width:36px;height:36px;border-radius:10px;background:var(--grad);color:#fff;display:grid;place-items:center;flex-shrink:0}
+.alert h4{color:#fff;font-family:'Inter';font-size:13.5px;font-weight:600;margin-bottom:3px}
+.alert p{color:var(--muted);font-size:12px}
+
+@media(max-width:1000px){.stats{grid-template-columns:1fr 1fr}.grid-2,.world{grid-template-columns:1fr}}
+@media(max-width:760px){body{grid-template-columns:1fr}.side{position:fixed;left:-260px;width:260px;transition:.3s;z-index:99}.side.open{left:0}}
+</style>
+</head>
+<body>
+
+<aside class="side" id="side">
+  <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-music"></i></span><span>STACKLY</span></a>
+  <div class="role"><div class="av">AD</div><div><h5>Admin Console</h5><span>Super Admin</span></div></div>
+  <div class="nav-title">Platform</div>
+  <div class="nav-item active"><i class="fa-solid fa-gauge-high"></i> Overview</div>
+  <div class="nav-item"><i class="fa-solid fa-users"></i> Users</div>
+  <div class="nav-item"><i class="fa-solid fa-microphone-lines"></i> Artists</div>
+  <div class="nav-item"><i class="fa-solid fa-calendar"></i> All Shows</div>
+  <div class="nav-item"><i class="fa-solid fa-tower-broadcast"></i> Streams</div>
+  <div class="nav-title">Finance</div>
+  <div class="nav-item"><i class="fa-solid fa-coins"></i> Revenue</div>
+  <div class="nav-item"><i class="fa-solid fa-file-invoice-dollar"></i> Payouts</div>
+  <div class="nav-title">System</div>
+  <div class="nav-item"><i class="fa-solid fa-shield-halved"></i> Security</div>
+  <div class="nav-item"><i class="fa-solid fa-gears"></i> Settings</div>
+  <div class="nav-item" onclick="location='login.html'"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div><h1>Platform <span class="grad">Overview</span> <small>All systems operational · 24 live streams active</small></h1></div>
+    <div class="tools">
+      <button class="icon-btn"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+      <button class="icon-btn"><i class="fa-solid fa-bars" id="burger"></i></button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="ico"><i class="fa-solid fa-users"></i></div><div class="num">128,450</div><div class="lbl">Total Users</div><div class="delta">+8.2% MoM</div></div>
+    <div class="stat"><div class="ico"><i class="fa-solid fa-microphone"></i></div><div class="num">852</div><div class="lbl">Artists Live</div><div class="delta">+24 this week</div></div>
+    <div class="stat"><div class="ico"><i class="fa-solid fa-tower-broadcast"></i></div><div class="num">24</div><div class="lbl">Active Streams</div><div class="delta">186K viewers</div></div>
+    <div class="stat"><div class="ico"><i class="fa-solid fa-coins"></i></div><div class="num">$2.4M</div><div class="lbl">Revenue MTD</div><div class="delta">+18.4% MoM</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Live Stream Viewers · Last 24h</h3><a href="#" style="color:var(--cyan);font-size:12px;text-transform:uppercase;letter-spacing:1.5px">Details</a></div>
+      <div class="live-chart">
+        <svg viewBox="0 0 600 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ff2bd6" stop-opacity=".6"/>
+              <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,160 C60,140 100,100 160,110 S260,60 320,80 S440,30 500,50 S580,90 600,70 L600,200 L0,200 Z" fill="url(#g1)"/>
+          <path d="M0,160 C60,140 100,100 160,110 S260,60 320,80 S440,30 500,50 S580,90 600,70" fill="none" stroke="#ff2bd6" stroke-width="3"/>
+          <path d="M0,160 C60,140 100,100 160,110 S260,60 320,80 S440,30 500,50 S580,90 600,70" fill="none" stroke="#00e5ff" stroke-width="1" opacity=".5" transform="translate(0,-12)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Top Cities Tonight</h3></div>
+      <div class="world">
+        <div class="city"><div class="l"><i class="fa-solid fa-location-dot"></i> Los Angeles</div><div class="v">42K</div></div>
+        <div class="city"><div class="l"><i class="fa-solid fa-location-dot"></i> Berlin</div><div class="v">28K</div></div>
+        <div class="city"><div class="l"><i class="fa-solid fa-location-dot"></i> Tokyo</div><div class="v">21K</div></div>
+        <div class="city"><div class="l"><i class="fa-solid fa-location-dot"></i> London</div><div class="v">19K</div></div>
+        <div class="city"><div class="l"><i class="fa-solid fa-location-dot"></i> São Paulo</div><div class="v">14K</div></div>
+        <div class="city"><div class="l"><i class="fa-solid fa-location-dot"></i> Sydney</div><div class="v">9K</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Recent Users</h3><a href="#" style="color:var(--cyan);font-size:12px;text-transform:uppercase;letter-spacing:1.5px">Manage Users</a></div>
+      <table class="tbl">
+        <thead><tr><th>User</th><th>Role</th><th>Joined</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80" alt="">Aria Knox</td><td><span class="role-pill c">Customer</span></td><td>Mar 18</td><td><span style="color:#6affa0">● Active</span></td></tr>
+          <tr><td class="name"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80" alt="">Leo Vance</td><td><span class="role-pill a">Agent</span></td><td>Mar 15</td><td><span style="color:#6affa0">● Active</span></td></tr>
+          <tr><td class="name"><img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80" alt="">Kai Mori</td><td><span class="role-pill c">Customer</span></td><td>Mar 12</td><td><span style="color:var(--gold)">● Pending</span></td></tr>
+          <tr><td class="name"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80" alt="">Sasha Lin</td><td><span class="role-pill x">Admin</span></td><td>Mar 10</td><td><span style="color:#6affa0">● Active</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>System Alerts</h3></div>
+      <div class="alert"><div class="a-ico"><i class="fa-solid fa-tower-broadcast"></i></div><div><h4>Stream load balancer spike</h4><p>Auto-scaled +4 nodes · 14 min ago</p></div></div>
+      <div class="alert"><div class="a-ico"><i class="fa-solid fa-credit-card"></i></div><div><h4>Payment gateway latency</h4><p>Resolved · 1h ago</p></div></div>
+      <div class="alert"><div class="a-ico"><i class="fa-solid fa-shield-halved"></i></div><div><h4>3 suspicious login attempts</h4><p>Blocked · IP rate limited</p></div></div>
+      <div class="alert"><div class="a-ico"><i class="fa-solid fa-circle-check"></i></div><div><h4>Backup completed</h4><p>All regions · 2h ago</p></div></div>
+    </div>
+  </div>
+</main>
+
+<script>
+document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',function(){if(this.textContent.includes('Sign Out'))return;document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));this.classList.add('active')}));
+document.getElementById('burger').addEventListener('click',()=>document.getElementById('side').classList.toggle('open'));
+</script>
+</body>
+</html>

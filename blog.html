@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blog — Stackly Music & Entertainment</title>
+<meta name="description" content="Stories, gear talk and tour diaries from the Stackly crew.">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0418;--bg2:#14082a;--surface:#1a0d33;--surface2:#241048;--magenta:#ff2bd6;--violet:#7a2bff;--cyan:#00e5ff;--text:#f6f0ff;--muted:#a59bc4;--grad:linear-gradient(135deg,#ff2bd6,#7a2bff 55%,#00e5ff)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Audiowide';font-weight:400;line-height:1.15}
+a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+.grad{background:var(--grad);-webkit-background-clip:text;color:transparent}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rgba(10,4,24,.92);backdrop-filter:blur(14px)}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Audiowide';font-size:22px}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:var(--grad);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,43,214,.5)} .logo-mark i{color:#fff;font-size:18px}
+.logo span{background:var(--grad);-webkit-background-clip:text;color:transparent}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{color:#e8defc;font-weight:500;font-size:14.5px;text-transform:uppercase;letter-spacing:1px;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--grad);transition:.3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{padding:10px 22px;border-radius:30px;background:var(--grad);color:#fff;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+.burger{display:none;color:#fff;font-size:24px;background:none;border:none;cursor:pointer}
+
+.page-head{position:relative;padding:170px 0 80px;text-align:center;overflow:hidden}
+.page-head::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,43,214,.35),transparent 50%),radial-gradient(circle at 70% 70%,rgba(0,229,255,.3),transparent 50%);z-index:-1}
+.page-head h1{font-size:clamp(40px,6vw,72px);margin-bottom:18px}
+.crumbs{color:var(--muted);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.crumbs a{color:var(--cyan)}
+
+.filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:24px 0}
+.filters button{padding:8px 20px;border-radius:30px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#cfc4ea;font-size:12.5px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;transition:.3s;font-family:inherit}
+.filters button.active,.filters button:hover{background:var(--grad);color:#fff;border-color:transparent}
+
+.section{padding:50px 0 100px}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.b-card{background:var(--surface);border:1px solid rgba(255,43,214,.12);border-radius:18px;overflow:hidden;transition:.4s}
+.b-card:hover{transform:translateY(-10px);border-color:rgba(255,43,214,.5);box-shadow:0 25px 60px rgba(255,43,214,.18)}
+.b-thumb{position:relative;overflow:hidden;aspect-ratio:16/10}
+.b-thumb img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.b-card:hover .b-thumb img{transform:scale(1.1)}
+.b-tag{position:absolute;top:14px;left:14px;background:var(--grad);color:#fff;font-size:11px;padding:5px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.b-body{padding:24px}
+.b-meta{color:var(--muted);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.b-meta i{color:var(--cyan);margin-right:6px}
+.b-body h3{color:#fff;font-family:'Inter';font-size:18px;font-weight:600;margin-bottom:10px;line-height:1.35}
+.b-body p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.b-link{color:var(--cyan);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;display:inline-flex;gap:8px;align-items:center;transition:.3s}
+.b-link:hover{color:var(--magenta);gap:14px}
+
+.newsletter{background:var(--bg2);padding:80px 0;text-align:center}
+.nl-box{max-width:560px;margin:0 auto}
+.nl-box h2{font-size:32px;margin-bottom:14px}
+.nl-box p{color:var(--muted);margin-bottom:24px}
+.nl-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.nl-form input{flex:1;min-width:220px;padding:14px 18px;border-radius:30px;border:1px solid rgba(255,255,255,.15);background:var(--surface);color:#fff;font-family:inherit;font-size:14px;outline:none}
+.nl-form input:focus{border-color:var(--magenta)}
+.nl-form button{padding:14px 28px;border-radius:30px;border:none;background:var(--grad);color:#fff;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit}
+
+.footer{background:#06020f;padding:60px 0 30px;border-top:1px solid rgba(255,43,214,.15);text-align:center;color:var(--muted);font-size:13px}
+
+.reveal{opacity:0;transform:translateY(40px);transition:.9s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.nav-links,.nav-cta{display:none}.burger{display:block}.nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(10,4,24,.97);padding:24px;gap:20px}.blog-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.blog-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-music"></i></span><span>STACKLY</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li><li><a href="pricing.html">Pricing</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="login.html" class="nav-cta">Sign In</a>
+    <button class="burger" id="burger"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<section class="page-head">
+  <div class="container">
+    <h1>The <span class="grad">Stage Notes</span></h1>
+    <p class="crumbs"><a href="home.html">Home</a> / Blog</p>
+    <div class="filters">
+      <button class="active" data-f="all">All</button>
+      <button data-f="touring">Touring</button>
+      <button data-f="gear">Gear</button>
+      <button data-f="production">Production</button>
+      <button data-f="industry">Industry</button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="blog-grid" id="grid">
+      <article class="b-card reveal" data-cat="touring"><div class="b-thumb"><span class="b-tag">Touring</span><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900" alt=""></div><div class="b-body"><div class="b-meta"><i class="fa-solid fa-calendar"></i>Mar 18 · 6 min</div><h3>10 Lessons from a 40-City World Tour</h3><p>What we learned about logistics, sleep and crowd energy across four continents.</p><a class="b-link" href="#">Read More <i class="fa-solid fa-arrow-right"></i></a></div></article>
+      <article class="b-card reveal" data-cat="gear"><div class="b-thumb"><span class="b-tag">Gear</span><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900" alt=""></div><div class="b-body"><div class="b-meta"><i class="fa-solid fa-calendar"></i>Mar 11 · 4 min</div><h3>The PA Stack That Powered Our Loudest Night</h3><p>Inside the line-array configuration we ran for a 28,000-capacity outdoor show.</p><a class="b-link" href="#">Read More <i class="fa-solid fa-arrow-right"></i></a></div></article>
+      <article class="b-card reveal" data-cat="production"><div class="b-thumb"><span class="b-tag">Production</span><img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=900" alt=""></div><div class="b-body"><div class="b-meta"><i class="fa-solid fa-calendar"></i>Mar 04 · 7 min</div><h3>Designing the LED Wall for a 90-Minute Set</h3><p>How our creative team built 14 unique visual moments tuned to every song.</p><a class="b-link" href="#">Read More <i class="fa-solid fa-arrow-right"></i></a></div></article>
+      <article class="b-card reveal" data-cat="industry"><div class="b-thumb"><span class="b-tag">Industry</span><img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=900" alt=""></div><div class="b-body"><div class="b-meta"><i class="fa-solid fa-calendar"></i>Feb 26 · 5 min</div><h3>Why Live Music Revenue Is Up 32% in 2025</h3><p>A breakdown of where audiences are spending and why ticketing is changing fast.</p><a class="b-link" href="#">Read More <i class="fa-solid fa-arrow-right"></i></a></div></article>
+      <article class="b-card reveal" data-cat="touring"><div class="b-thumb"><span class="b-tag">Touring</span><img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900" alt=""></div><div class="b-body"><div class="b-meta"><i class="fa-solid fa-calendar"></i>Feb 19 · 6 min</div><h3>The Art of the Festival Headline Slot</h3><p>Set list pacing, lighting cues and the perfect encore — broken down minute-by-minute.</p><a class="b-link" href="#">Read More <i class="fa-solid fa-arrow-right"></i></a></div></article>
+      <article class="b-card reveal" data-cat="production"><div class="b-thumb"><span class="b-tag">Production</span><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900" alt=""></div><div class="b-body"><div class="b-meta"><i class="fa-solid fa-calendar"></i>Feb 12 · 8 min</div><h3>Spatial Audio: The Next Live-Streaming Wave</h3><p>How Dolby Atmos broadcasting is changing the at-home concert experience.</p><a class="b-link" href="#">Read More <i class="fa-solid fa-arrow-right"></i></a></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container nl-box">
+    <h2>Get Tour Notes in Your <span class="grad">Inbox</span></h2>
+    <p>Monthly stories from the road. No spam — just the good stuff.</p>
+    <form class="nl-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed ✓'">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">© 2026 Stackly Music & Entertainment</footer>
+
+<script>
+document.getElementById('burger').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  const f=b.dataset.f;document.querySelectorAll('.b-card').forEach(c=>c.style.display=(f==='all'||c.dataset.cat===f)?'block':'none');
+}));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
