@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artist Dashboard — BeatFlow</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#f0f2f8;display:flex;min-height:100vh}
+h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.5px}
+a{text-decoration:none;color:inherit}
+.sidebar{width:260px;height:100vh;background:#0d0d1a;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200;transition:.35s;overflow:hidden}
+.sidebar.collapsed{width:72px}
+.sb-head{padding:20px;border-bottom:1px solid rgba(255,255,255,.08);min-height:72px;display:flex;align-items:center}
+.sb-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;display:flex;align-items:center;gap:10px;white-space:nowrap;overflow:hidden;letter-spacing:2px}
+.sb-logo .logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#e63946,#ff006e);border-radius:8px;display:grid;place-items:center;font-size:16px;color:#fff;flex-shrink:0}
+.sb-logo span{transition:.3s}
+.sidebar.collapsed .sb-logo span{opacity:0;width:0;overflow:hidden}
+.sb-user{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-role-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(230,57,70,.15);color:#e63946;border:1px solid rgba(230,57,70,.3);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.sb-username{font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-email{font-size:12px;color:#7a8aa5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar.collapsed .sb-user{padding:12px}
+.sidebar.collapsed .sb-role-badge span,.sidebar.collapsed .sb-username,.sidebar.collapsed .sb-email{display:none}
+.sb-nav{flex:1;padding:14px 0;overflow-y:auto}
+.sb-section{padding:8px 20px;font-size:11px;color:#4a5e7a;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-top:8px}
+.sidebar.collapsed .sb-section{visibility:hidden}
+.sb-link{display:flex;align-items:center;gap:14px;padding:12px 20px;color:#a3b0c5;font-size:14px;font-weight:500;transition:.2s;cursor:pointer;border-left:3px solid transparent;background:none;width:100%;border-top:none;border-right:none;border-bottom:none;white-space:nowrap}
+.sb-link i{font-size:15px;width:20px;text-align:center;flex-shrink:0;color:#7a8aa5}
+.sidebar.collapsed .sb-link span{opacity:0;width:0;overflow:hidden}
+.sb-link:hover,.sb-link.active{color:#fff;background:rgba(255,255,255,.06);border-left-color:#e63946}
+.sb-link:hover i,.sb-link.active i{color:#e63946}
+.sb-link.logout-btn{color:#e74c3c}
+.sb-link.logout-btn i{color:#e74c3c}
+.sb-link.logout-btn:hover{background:rgba(231,76,60,.1);border-left-color:#e74c3c}
+.sb-footer{padding:14px 20px;border-top:1px solid rgba(255,255,255,.06)}
+.sb-toggle{background:none;border:1px solid rgba(255,255,255,.12);color:#a3b0c5;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px;transition:.2s}
+.sb-toggle:hover{background:rgba(255,255,255,.06);color:#fff}
+.sidebar.collapsed .sb-toggle span{display:none}
+.main{margin-left:260px;flex:1;min-height:100vh;transition:.35s;display:flex;flex-direction:column}
+.main.expanded{margin-left:72px}
+.topbar{background:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e8ecf4;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(10,10,26,.05)}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.burger-main{background:none;border:none;font-size:18px;cursor:pointer;color:#5a6a85;display:none}
+.topbar-title h2{font-size:22px;margin:0}
+.topbar-title span{font-size:13px;color:#7a8aa5;font-family:'Inter',sans-serif}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.topbar-time{font-size:13px;color:#5a6a85}
+.notif-btn{position:relative;background:none;border:none;font-size:17px;cursor:pointer;color:#5a6a85;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;transition:.2s}
+.notif-btn:hover{background:#f0f2f8}
+.notif-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;background:#e63946;border-radius:50%;border:2px solid #fff}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e63946,#ff006e);display:grid;place-items:center;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.content{padding:28px;flex:1}
+.welcome-banner{background:linear-gradient(135deg,#1a1a3e,#e63946);color:#fff;border-radius:18px;padding:26px 32px;margin-bottom:26px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.welcome-banner::before{content:'';position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
+.wb-text h3{font-size:28px;margin-bottom:6px}
+.wb-text h3 span{color:#ffd166}
+.wb-text p{opacity:.8;font-size:14px}
+.wb-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;position:relative;z-index:1}
+.wb-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
+.stat-card{background:#fff;border-radius:14px;padding:22px;border:1px solid #e8ecf4;transition:.3s;animation:fadeCard .5s ease both}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(10,10,26,.1);border-color:#e63946}
+.sc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sc-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:18px}
+.sc-trend{font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:20px}
+.sc-trend.up{color:#27ae60;background:#eafaf1}
+.sc-val{font-family:'Bebas Neue',sans-serif;font-size:36px;margin-bottom:4px;letter-spacing:1px}
+.sc-lbl{font-size:13px;color:#7a8aa5}
+.charts-row{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:24px}
+.chart-card{background:#fff;border-radius:14px;padding:22px;border:1px solid #e8ecf4;min-width:0}
+.chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.chart-head h4{font-size:20px}
+.chart-head span{font-size:12px;color:#7a8aa5}
+.tracks-card{background:#fff;border-radius:14px;border:1px solid #e8ecf4;overflow:hidden}
+.tracks-head{padding:18px 22px;border-bottom:1px solid #f0f2f8;display:flex;justify-content:space-between;align-items:center}
+.tracks-head h4{font-size:20px}
+.btn-sm{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;border:none;cursor:pointer;transition:.3s}
+.btn-sm:hover{transform:scale(1.05)}
+.track-item{display:flex;align-items:center;gap:14px;padding:14px 22px;border-top:1px solid #f7f8fc;transition:.2s}
+.track-item:hover{background:#fafbfc}
+.track-num{width:24px;font-size:13px;color:#7a8aa5;text-align:center}
+.track-thumb{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#e63946,#ff006e);display:grid;place-items:center;color:#fff;font-size:16px;flex-shrink:0}
+.track-info{flex:1}
+.track-info h5{font-size:14px;font-weight:600;margin-bottom:2px}
+.track-info span{font-size:12px;color:#7a8aa5}
+.track-plays{font-size:13px;color:#5a6a85;font-weight:600}
+.track-earn{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#e63946;letter-spacing:.5px}
+@keyframes fadeCard{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(max-width:1100px){.cards-grid{grid-template-columns:repeat(2,1fr)}.charts-row{grid-template-columns:1fr}}
+@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.mob-open{transform:none}.main{margin-left:0}.main.expanded{margin-left:0}.burger-main{display:block}}
+@media(max-width:480px){.cards-grid{grid-template-columns:1fr}.welcome-banner{flex-direction:column;gap:16px}.wb-meta{align-items:flex-start}}
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <div class="sb-logo">
+      <div class="logo-icon"><i class="fa-solid fa-music"></i></div>
+      <span>BEATFLOW</span>
+    </div>
+  </div>
+  <div class="sb-user">
+    <div class="sb-role-badge"><i class="fa-solid fa-microphone"></i> <span>Artist</span></div>
+    <div class="sb-username" id="sidebarName">Artist Profile</div>
+    <div class="sb-email" id="sidebarEmail">artist@beatflow.in</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-section">My Music</div>
+    <button class="sb-link active"><i class="fa-solid fa-chart-pie"></i><span>Overview</span></button>
+    <button class="sb-link"><i class="fa-solid fa-music"></i><span>My Tracks</span></button>
+    <button class="sb-link"><i class="fa-solid fa-cloud-upload-alt"></i><span>Upload Music</span></button>
+    <button class="sb-link"><i class="fa-solid fa-compact-disc"></i><span>Albums</span></button>
+    <div class="sb-section">Growth</div>
+    <button class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></button>
+    <button class="sb-link"><i class="fa-solid fa-users"></i><span>Fans</span></button>
+    <button class="sb-link"><i class="fa-solid fa-indian-rupee-sign"></i><span>Royalties</span></button>
+    <button class="sb-link"><i class="fa-solid fa-store"></i><span>My Store</span></button>
+    <div class="sb-section">Account</div>
+    <button class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+    <button class="sb-link logout-btn" onclick="window.location.href='login.html'"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+  </nav>
+  <div class="sb-footer">
+    <button class="sb-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i><span>Collapse</span></button>
+  </div>
+</aside>
+
+<div class="main" id="mainContent">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="burger-main" id="mobileBurger"><i class="fa-solid fa-bars"></i></button>
+      <div class="topbar-title">
+        <h2>Artist Dashboard</h2>
+        <span>Your Music Command Center</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-time" id="topbarTime"></span>
+      <button class="notif-btn"><i class="fa-solid fa-bell"></i><div class="notif-dot"></div></button>
+      <div class="avatar">A</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="welcome-banner">
+      <div class="wb-text">
+        <h3>Keep <span>Creating</span>, Artist! 🎵</h3>
+        <p>Your music is reaching thousands of fans across India. Keep the rhythm going.</p>
+      </div>
+      <div class="wb-meta">
+        <div class="wb-badge"><i class="fa-solid fa-microphone"></i> Artist</div>
+        <span id="wbEmail" style="font-size:13px;opacity:.8">artist@beatflow.in</span>
+        <strong id="wbDate" style="color:#ffd166"></strong>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:#fdeef0;color:#e63946"><i class="fa-solid fa-headphones"></i></div>
+          <span class="sc-trend up"><i class="fa-solid fa-arrow-up"></i> 22%</span>
+        </div>
+        <div class="sc-val">2.4M</div>
+        <div class="sc-lbl">Total Streams</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:#eafaf1;color:#27ae60"><i class="fa-solid fa-users"></i></div>
+          <span class="sc-trend up"><i class="fa-solid fa-arrow-up"></i> 15%</span>
+        </div>
+        <div class="sc-val">48,200</div>
+        <div class="sc-lbl">Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:#ebf5fb;color:#2980b9"><i class="fa-solid fa-music"></i></div>
+          <span class="sc-trend up"><i class="fa-solid fa-arrow-up"></i> 3%</span>
+        </div>
+        <div class="sc-val">34</div>
+        <div class="sc-lbl">Published Tracks</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-head">
+          <div class="sc-icon" style="background:#fef5e7;color:#e67e22"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+          <span class="sc-trend up"><i class="fa-solid fa-arrow-up"></i> 18%</span>
+        </div>
+        <div class="sc-val">₹92,400</div>
+        <div class="sc-lbl">This Month Royalties</div>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-head"><h4>Stream Trends</h4><span>Last 6 Months</span></div>
+        <canvas id="streamChart" height="110"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-head"><h4>Genre Breakdown</h4><span>Your Music</span></div>
+        <canvas id="genreChart" height="110"></canvas>
+      </div>
+    </div>
+
+    <div class="tracks-card">
+      <div class="tracks-head">
+        <h4>Top Performing Tracks</h4>
+        <button class="btn-sm"><i class="fa-solid fa-cloud-upload-alt"></i> Upload New</button>
+      </div>
+      <div class="track-item">
+        <span class="track-num">1</span>
+        <div class="track-thumb"><i class="fa-solid fa-music"></i></div>
+        <div class="track-info"><h5>Neon Lights (Original Mix)</h5><span>Electronic · 3:42</span></div>
+        <span class="track-plays">1.2M plays</span>
+        <span class="track-earn">₹38,200</span>
+      </div>
+      <div class="track-item">
+        <span class="track-num">2</span>
+        <div class="track-thumb" style="background:linear-gradient(135deg,#3a86ff,#8338ec)"><i class="fa-solid fa-music"></i></div>
+        <div class="track-info"><h5>Monsoon Vibes</h5><span>Indie Pop · 4:10</span></div>
+        <span class="track-plays">820K plays</span>
+        <span class="track-earn">₹24,600</span>
+      </div>
+      <div class="track-item">
+        <span class="track-num">3</span>
+        <div class="track-thumb" style="background:linear-gradient(135deg,#06d6a0,#118ab2)"><i class="fa-solid fa-music"></i></div>
+        <div class="track-info"><h5>Desi Beats Remix</h5><span>Hip-Hop · 3:28</span></div>
+        <span class="track-plays">640K plays</span>
+        <span class="track-earn">₹19,200</span>
+      </div>
+      <div class="track-item">
+        <span class="track-num">4</span>
+        <div class="track-thumb" style="background:linear-gradient(135deg,#ffd166,#ef476f)"><i class="fa-solid fa-music"></i></div>
+        <div class="track-info"><h5>Summer Anthem 2026</h5><span>Pop · 3:55</span></div>
+        <span class="track-plays">410K plays</span>
+        <span class="track-earn">₹12,300</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const user = JSON.parse(sessionStorage.getItem('bfUser') || '{}');
+if (user.email) { document.getElementById('sidebarEmail').textContent = user.email; document.getElementById('wbEmail').textContent = user.email; }
+if (user.name) document.getElementById('sidebarName').textContent = user.name;
+const now = new Date();
+document.getElementById('wbDate').textContent = now.toLocaleDateString('en-IN', { weekday:'long', month:'short', day:'numeric' });
+function updateTime() { document.getElementById('topbarTime').textContent = new Date().toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' }); }
+updateTime(); setInterval(updateTime, 1000);
+document.getElementById('sidebarToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('mainContent').classList.toggle('expanded');
+});
+document.getElementById('mobileBurger').addEventListener('click', () => { document.getElementById('sidebar').classList.toggle('mob-open'); });
+
+new Chart(document.getElementById('streamChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+    datasets: [{
+      label: 'Streams',
+      data: [280000, 320000, 290000, 410000, 520000, 640000],
+      borderColor: '#e63946', backgroundColor: 'rgba(230,57,70,.1)', fill: true, tension: .4, pointBackgroundColor: '#e63946', pointRadius: 5
+    }]
+  },
+  options: { responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, grid:{ color:'rgba(0,0,0,.04)' } }, x:{ grid:{ display:false } } } }
+});
+
+new Chart(document.getElementById('genreChart').getContext('2d'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Electronic', 'Indie Pop', 'Hip-Hop', 'Folk'],
+    datasets: [{ data: [40, 25, 22, 13], backgroundColor: ['#e63946','#3a86ff','#8338ec','#06d6a0'], borderWidth: 0 }]
+  },
+  options: { responsive:true, plugins:{ legend:{ position:'bottom', labels:{ boxWidth:12, padding:14, font:{size:12} } } }, cutout:'65%' }
+});
+</script>
+</body>
+</html>

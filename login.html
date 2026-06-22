@@ -3,92 +3,333 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sign In — Stackly</title>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Login — BeatFlow Music & Entertainment</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--bg:#0a0418;--surface:#1a0d33;--surface2:#241048;--magenta:#ff2bd6;--violet:#7a2bff;--cyan:#00e5ff;--text:#f6f0ff;--muted:#a59bc4;--grad:linear-gradient(135deg,#ff2bd6,#7a2bff 55%,#00e5ff)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden}
-body::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,43,214,.25),transparent 70%);top:-200px;left:-200px;animation:float 8s ease-in-out infinite}
-body::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.22),transparent 70%);bottom:-200px;right:-200px;animation:float 10s ease-in-out infinite reverse}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}
-h1,h2{font-family:'Audiowide';font-weight:400}
-a{color:var(--cyan);text-decoration:none}
-.grad{background:var(--grad);-webkit-background-clip:text;color:transparent}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0d0d1a;overflow:hidden;height:100vh}
+h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;line-height:1.1;letter-spacing:1px}
+a{text-decoration:none;color:inherit}
 
-.shell{width:100%;max-width:920px;display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid rgba(255,43,214,.2);border-radius:24px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);position:relative;z-index:1}
-.brand{padding:50px 40px;background:linear-gradient(135deg,rgba(255,43,214,.18),rgba(0,229,255,.12));display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
-.brand::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900') center/cover;opacity:.18;mix-blend-mode:overlay}
-.logo{display:flex;align-items:center;gap:12px;font-family:'Audiowide';font-size:20px;position:relative;z-index:1}
-.logo-mark{width:38px;height:38px;border-radius:10px;background:var(--grad);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,43,214,.5)} .logo-mark i{color:#fff;font-size:18px}
-.logo span{background:var(--grad);-webkit-background-clip:text;color:transparent}
-.brand h2{font-size:30px;margin-bottom:14px;position:relative;z-index:1;line-height:1.2}
-.brand p{color:#e8defc;font-size:14px;position:relative;z-index:1}
-.brand .bullets{margin-top:20px;list-style:none;position:relative;z-index:1}
-.brand .bullets li{padding:8px 0;color:#cfc4ea;font-size:13.5px;display:flex;gap:10px}
-.brand .bullets i{color:var(--cyan)}
+/* LAYOUT */
+.page{display:grid;grid-template-columns:1fr 1fr;height:100vh;overflow:hidden}
 
-.form-side{padding:50px 40px}
-.form-side h1{font-size:28px;margin-bottom:8px;color:#fff}
-.form-side>p{color:var(--muted);font-size:14px;margin-bottom:26px}
-.field{margin-bottom:16px}
-.field label{display:block;color:#e8defc;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;font-weight:600}
-.field input{width:100%;padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(10,4,24,.5);color:#fff;font-family:inherit;font-size:14px;outline:none;transition:.3s}
-.field input:focus{border-color:var(--magenta);box-shadow:0 0 0 3px rgba(255,43,214,.15)}
-.row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:18px;color:var(--muted)}
-.row label{display:flex;gap:8px;align-items:center;cursor:pointer}
-.btn{width:100%;padding:14px;border-radius:30px;border:none;background:var(--grad);color:#fff;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit;box-shadow:0 12px 30px rgba(255,43,214,.4);transition:.3s}
-.btn:hover{transform:translateY(-3px)}
-.divider{text-align:center;margin:22px 0;color:var(--muted);font-size:12px;position:relative}
-.divider::before,.divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:rgba(255,255,255,.1)}
-.divider::before{left:0}.divider::after{right:0}
-.socials{display:flex;gap:10px}
-.socials button{flex:1;padding:11px;border-radius:12px;background:rgba(10,4,24,.5);border:1px solid rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:14px;transition:.3s}
-.socials button:hover{border-color:var(--cyan);color:var(--cyan)}
-.alt{text-align:center;margin-top:22px;font-size:13.5px;color:var(--muted)}
+/* LEFT PANEL */
+.left-panel{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 48px;color:#fff}
+.left-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.left-overlay{position:absolute;inset:0;background:linear-gradient(155deg,rgba(10,10,26,.94),rgba(10,10,26,.72));z-index:-1}
+.left-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;display:flex;align-items:center;gap:12px;margin-bottom:48px;align-self:flex-start}
+.left-logo .logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#e63946,#ff006e);border-radius:10px;display:grid;place-items:center;font-size:18px;color:#fff}
+.left-content{max-width:420px}
+.left-eyebrow{color:#e63946;letter-spacing:4px;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:16px;display:block}
+.left-content h2{font-size:48px;margin-bottom:20px;line-height:1}
+.left-content h2 span{color:#e63946}
+.left-content p{opacity:.82;font-size:15px;line-height:1.75;margin-bottom:36px}
+.trust-items{display:flex;flex-direction:column;gap:14px}
+.trust-item{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);backdrop-filter:blur(8px);padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.1)}
+.trust-item i{color:#e63946;font-size:18px;width:20px}
+.trust-item p{font-size:14px;opacity:.9;margin:0}
+.left-bottom{margin-top:auto;font-size:13px;opacity:.5;align-self:flex-start;padding-top:40px}
 
-@media(max-width:760px){.shell{grid-template-columns:1fr}.brand{padding:30px}}
+/* RIGHT PANEL */
+.right-panel{background:#f7f8fc;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 60px;overflow-y:auto}
+.form-card{width:100%;max-width:440px;animation:slideUp .8s ease}
+
+.form-header{text-align:center;margin-bottom:32px}
+.form-header .icon-ring{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0d0d1a,#1a1a3e);display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 10px 30px rgba(10,10,26,.2)}
+.form-header .icon-ring i{color:#e63946;font-size:24px}
+.form-header h3{font-size:32px;margin-bottom:8px}
+.form-header p{color:#5a6a85;font-size:14px}
+
+/* FORM */
+.form-group{margin-bottom:20px;position:relative}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#0d0d1a;margin-bottom:7px;letter-spacing:.3px}
+.input-wrap{position:relative}
+.input-wrap i.icon-left{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;font-size:15px;pointer-events:none}
+.input-wrap input{width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#0d0d1a;background:#fff;transition:.3s;outline:none}
+.input-wrap input:focus{border-color:#e63946;box-shadow:0 0 0 4px rgba(230,57,70,.1)}
+.input-wrap input.error{border-color:#e74c3c;box-shadow:0 0 0 4px rgba(231,76,60,.1)}
+.input-wrap input.success{border-color:#27ae60;box-shadow:0 0 0 4px rgba(39,174,96,.1)}
+.toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;cursor:pointer;font-size:15px;transition:.2s}
+.toggle-pw:hover{color:#0d0d1a}
+.err-msg{color:#e74c3c;font-size:12px;margin-top:6px;display:none;align-items:center;gap:5px}
+.err-msg.show{display:flex}
+
+/* CUSTOM ROLE DROPDOWN */
+.custom-select{position:relative}
+.select-trigger{width:100%;padding:13px 14px 13px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#0d0d1a;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:.3s;text-align:left}
+.select-trigger span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.select-trigger span.placeholder{color:#7a8aa5}
+.select-trigger .select-arrow{font-size:12px;color:#7a8aa5;transition:.25s;flex-shrink:0}
+.select-trigger.open{border-color:#e63946;box-shadow:0 0 0 4px rgba(230,57,70,.1)}
+.select-trigger.open .select-arrow{transform:rotate(180deg)}
+.select-trigger.error{border-color:#e74c3c;box-shadow:0 0 0 4px rgba(231,76,60,.1)}
+.select-trigger.success{border-color:#27ae60;box-shadow:0 0 0 4px rgba(39,174,96,.1)}
+.select-options{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 16px 36px rgba(10,10,26,.15);list-style:none;max-height:220px;overflow-y:auto;z-index:60;display:none;padding:6px}
+.select-options.show{display:block}
+.select-options li{padding:11px 14px;font-size:14.5px;color:#0d0d1a;border-radius:7px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.select-options li:hover,.select-options li.active{background:rgba(230,57,70,.1);color:#0d0d1a}
+.select-options li i{color:#e63946;width:16px;text-align:center}
+.role-icon-left{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;font-size:15px;pointer-events:none;z-index:1}
+
+.form-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.remember{display:flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer}
+.remember input[type=checkbox]{width:16px;height:16px;accent-color:#e63946;cursor:pointer}
+.forgot{font-size:13.5px;color:#e63946;font-weight:600;transition:.2s}
+.forgot:hover{text-decoration:underline}
+
+/* ALERT */
+.alert{padding:13px 16px;border-radius:10px;font-size:14px;font-weight:500;margin-bottom:20px;display:none;align-items:center;gap:10px}
+.alert.show{display:flex}
+.alert-error{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#c0392b}
+.alert-success{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.3);color:#1e8449}
+
+/* BUTTONS */
+.btn-primary{width:100%;padding:15px;border-radius:10px;background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;border:none;font-family:'Inter',sans-serif;font-size:15.5px;font-weight:700;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(230,57,70,.4)}
+.btn-primary.loading{pointer-events:none;opacity:.8}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+
+.signup-link{text-align:center;font-size:14px;color:#5a6a85;margin-top:18px}
+.signup-link a{color:#e63946;font-weight:600}
+.signup-link a:hover{text-decoration:underline}
+
+.form-back{display:flex;justify-content:flex-start;margin-bottom:20px}
+.form-back a{display:flex;align-items:center;gap:8px;color:#0d0d1a;font-size:13px;font-weight:600;background:#fff;padding:10px 16px;border-radius:30px;border:1px solid #e2e8f0;transition:.3s}
+.form-back a:hover{background:#0d0d1a;color:#e63946}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){
+  .page{grid-template-columns:1fr}
+  .left-panel{display:none}
+  .right-panel{padding:40px 28px;justify-content:flex-start;padding-top:80px}
+  body{overflow-y:auto;height:auto}
+}
+@media(max-width:480px){.right-panel{padding:40px 20px;padding-top:80px}}
 </style>
 </head>
 <body>
-<div class="shell">
-  <div class="brand">
-    <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-music"></i></span><span>STACKLY</span></a>
-    <div>
-      <h2>Welcome <span class="grad">Back to the Stage</span></h2>
-      <p>Sign in to manage your shows, tickets and tour calendar.</p>
-      <ul class="bullets">
-        <li><i class="fa-solid fa-circle-check"></i> Live show dashboard</li>
-        <li><i class="fa-solid fa-circle-check"></i> Real-time stream analytics</li>
-        <li><i class="fa-solid fa-circle-check"></i> Artist & venue messaging</li>
-      </ul>
+
+<div class="page">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <video class="left-video" autoplay muted loop playsinline>
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-dj-playing-music-on-a-turntable-in-a-concert-4553-large.mp4" type="video/mp4">
+    </video>
+    <div class="left-overlay"></div>
+    <a href="index.html" class="left-logo">
+      <div class="logo-icon"><i class="fa-solid fa-music"></i></div>
+      BEATFLOW
+    </a>
+    <div class="left-content">
+      <span class="left-eyebrow">Welcome Back</span>
+      <h2>Your <span>Stage</span> Awaits</h2>
+      <p>Sign in to access your personalized dashboard — stream music, manage events, track your royalties, and connect with your audience.</p>
+      <div class="trust-items">
+        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><p>Bank-grade 256-bit SSL encryption</p></div>
+        <div class="trust-item"><i class="fa-solid fa-users"></i><p>Trusted by 12M+ users across India</p></div>
+        <div class="trust-item"><i class="fa-solid fa-headphones"></i><p>50,000+ artists on the platform</p></div>
+      </div>
     </div>
-    <p style="font-size:12px;color:#cfc4ea;position:relative;z-index:1">© 2026 Stackly Music & Entertainment</p>
+    <div class="left-bottom">© 2026 BeatFlow Entertainment Pvt. Ltd.</div>
   </div>
-  <div class="form-side">
-    <h1>Sign <span class="grad">In</span></h1>
-    <p>Access your Stackly account.</p>
-    <form id="lf">
-      <div class="field"><label>Email</label><input type="email" required placeholder="you@email.com"></div>
-      <div class="field"><label>Password</label><input type="password" required placeholder="••••••••"></div>
-      <div class="row">
-        <label><input type="checkbox"> Remember me</label>
-        <a href="#">Forgot password?</a>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="form-card">
+      <div class="form-back">
+        <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
       </div>
-      <button class="btn">Sign In <i class="fa-solid fa-arrow-right"></i></button>
-      <div class="divider">OR CONTINUE WITH</div>
-      <div class="socials">
-        <button type="button"><i class="fa-brands fa-google"></i></button>
-        <button type="button"><i class="fa-brands fa-apple"></i></button>
-        <button type="button"><i class="fa-brands fa-spotify"></i></button>
+      <div class="form-header">
+        <div class="icon-ring"><i class="fa-solid fa-lock"></i></div>
+        <h3>Sign In</h3>
+        <p>Enter your credentials to access your dashboard</p>
       </div>
-      <p class="alt">New to Stackly? <a href="signup.html">Create an account</a></p>
-    </form>
+
+      <div class="alert alert-error" id="alertError">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="alertErrorMsg">Invalid Email or Password. Please try again.</span>
+      </div>
+      <div class="alert alert-success" id="alertSuccess">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Login successful! Redirecting to your dashboard…</span>
+      </div>
+
+      <form id="loginForm" novalidate>
+
+        <!-- Role -->
+        <div class="form-group">
+          <label>Select Your Role</label>
+          <div class="custom-select" id="roleSelect">
+            <i class="role-icon-left fa-solid fa-user-tag"></i>
+            <div class="select-trigger" id="roleTrigger" tabindex="0">
+              <span class="placeholder" id="roleDisplay">Choose your role…</span>
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </div>
+            <ul class="select-options" id="roleOptions">
+              <li data-value="admin"><i class="fa-solid fa-crown"></i> Admin</li>
+              <li data-value="artist"><i class="fa-solid fa-microphone"></i> Artist</li>
+              <li data-value="organizer"><i class="fa-solid fa-calendar-check"></i> Event Organizer</li>
+              <li data-value="fan"><i class="fa-solid fa-heart"></i> Fan / Listener</li>
+            </ul>
+          </div>
+          <div class="err-msg" id="roleErr"><i class="fa-solid fa-circle-exclamation"></i> Please select your role</div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope icon-left"></i>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="err-msg" id="emailErr"><i class="fa-solid fa-circle-exclamation"></i> Enter a valid email address</div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock icon-left"></i>
+            <input type="password" id="password" placeholder="Your password" autocomplete="current-password">
+            <i class="fa-solid fa-eye toggle-pw" id="togglePw"></i>
+          </div>
+          <div class="err-msg" id="passwordErr"><i class="fa-solid fa-circle-exclamation"></i> Password must be at least 6 characters</div>
+        </div>
+
+        <div class="form-row">
+          <label class="remember">
+            <input type="checkbox" id="rememberMe"> Remember me
+          </label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-primary" id="loginBtn">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+
+        <div class="signup-link">Don't have an account? <a href="signup.html">Create one free</a></div>
+      </form>
+    </div>
   </div>
 </div>
+
 <script>
-document.getElementById('lf').addEventListener('submit',e=>{e.preventDefault();window.location='customer-dashboard.html'});
+// ---- Custom role dropdown ----
+const roleTrigger = document.getElementById('roleTrigger');
+const roleOptions = document.getElementById('roleOptions');
+const roleDisplay = document.getElementById('roleDisplay');
+let selectedRole = '';
+
+roleTrigger.addEventListener('click', () => {
+  roleTrigger.classList.toggle('open');
+  roleOptions.classList.toggle('show');
+});
+document.addEventListener('click', (e) => {
+  if (!document.getElementById('roleSelect').contains(e.target)) {
+    roleTrigger.classList.remove('open');
+    roleOptions.classList.remove('show');
+  }
+});
+roleOptions.querySelectorAll('li').forEach(li => {
+  li.addEventListener('click', () => {
+    selectedRole = li.dataset.value;
+    roleDisplay.textContent = li.textContent.trim();
+    roleDisplay.classList.remove('placeholder');
+    roleTrigger.classList.remove('open','error');
+    roleTrigger.classList.add('success');
+    roleOptions.classList.remove('show');
+    document.getElementById('roleErr').classList.remove('show');
+    roleOptions.querySelectorAll('li').forEach(l => l.classList.remove('active'));
+    li.classList.add('active');
+  });
+});
+
+// ---- Toggle password ----
+document.getElementById('togglePw').addEventListener('click', function() {
+  const pw = document.getElementById('password');
+  const isText = pw.type === 'text';
+  pw.type = isText ? 'password' : 'text';
+  this.classList.toggle('fa-eye', isText);
+  this.classList.toggle('fa-eye-slash', !isText);
+});
+
+// ---- Form validation & submit ----
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let valid = true;
+
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+
+  // Reset
+  [email, password].forEach(el => { el.classList.remove('error','success'); });
+  document.querySelectorAll('.err-msg').forEach(m => m.classList.remove('show'));
+  document.querySelectorAll('.alert').forEach(a => a.classList.remove('show'));
+
+  // Role
+  if (!selectedRole) {
+    roleTrigger.classList.add('error');
+    document.getElementById('roleErr').classList.add('show');
+    valid = false;
+  }
+
+  // Email
+  if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    email.classList.add('error');
+    document.getElementById('emailErr').classList.add('show');
+    valid = false;
+  } else { email.classList.add('success'); }
+
+  // Password
+  if (!password.value || password.value.length < 6) {
+    password.classList.add('error');
+    document.getElementById('passwordErr').classList.add('show');
+    valid = false;
+  } else { password.classList.add('success'); }
+
+  if (!valid) return;
+
+  // Loading state
+  const btn = document.getElementById('loginBtn');
+  btn.classList.add('loading');
+  btn.innerHTML = '<div class="spinner"></div> Signing in…';
+
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';
+
+    // Demo credentials check
+    const demoUsers = {
+      admin: 'admin@beatflow.in',
+      artist: 'artist@beatflow.in',
+      organizer: 'organizer@beatflow.in',
+      fan: 'fan@beatflow.in'
+    };
+
+    // Store user data for dashboard
+    const userData = { role: selectedRole, email: email.value };
+    sessionStorage.setItem('bfUser', JSON.stringify(userData));
+
+    document.getElementById('alertSuccess').classList.add('show');
+
+    setTimeout(() => {
+      // Navigate based on role
+      const dashMap = {
+        admin: 'admin-dashboard.html',
+        artist: 'artist-dashboard.html',
+        organizer: 'organizer-dashboard.html',
+        fan: 'fan-dashboard.html'
+      };
+      window.location.href = dashMap[selectedRole] || 'admin-dashboard.html';
+    }, 1200);
+  }, 1600);
+});
 </script>
 </body>
 </html>
