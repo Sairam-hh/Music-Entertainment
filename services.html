@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services — BeatFlow | Streaming, Ticketing, Artist Tools</title>
+<meta name="description" content="Explore BeatFlow's full suite of services: music streaming, artist management, event ticketing, live streaming, analytics, royalties, and merch tools.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#fff;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;line-height:1.1;letter-spacing:1px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:.4s;background:rgba(10,10,26,.95);backdrop-filter:blur(12px)}
+.nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);padding:12px 0}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#fff;display:flex;align-items:center;gap:10px;letter-spacing:2px}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#e63946,#ff006e);border-radius:8px;display:grid;place-items:center;font-size:16px;color:#fff}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.85);font-weight:500;font-size:14px;position:relative;transition:.3s;letter-spacing:.5px}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:#e63946;transition:.3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.btn-nav-outline{color:#fff;border:1.5px solid rgba(255,255,255,.4);padding:9px 22px;border-radius:25px;font-size:13.5px;font-weight:600;transition:.3s}
+.btn-nav-outline:hover{border-color:#e63946;color:#e63946}
+.btn-nav-fill{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;padding:9px 22px;border-radius:25px;font-size:13.5px;font-weight:600;transition:.3s}
+.btn-nav-fill:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(230,57,70,.4)}
+.burger{display:none;color:#fff;font-size:24px;background:none;border:none;cursor:pointer}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,26,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:#fff;font-size:28px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;transition:.3s}
+.mobile-menu a:hover{color:#e63946}
+.mobile-close{position:absolute;top:20px;right:24px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer}
+
+.page-hero{position:relative;padding:170px 0 100px;background:linear-gradient(135deg,#0d0d1a,#1a1a3e);color:#fff;text-align:center;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(230,57,70,.25),transparent 70%);border-radius:50%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;color:#e63946;letter-spacing:4px;font-size:12px;font-weight:700;margin-bottom:20px;text-transform:uppercase;background:rgba(230,57,70,.1);border:1px solid rgba(230,57,70,.3);padding:8px 20px;border-radius:30px;position:relative;z-index:2}
+.page-hero h1{font-size:clamp(44px,7vw,80px);margin-bottom:18px;position:relative;z-index:2}
+.page-hero p{max-width:650px;margin:0 auto;opacity:.85;font-size:16px;position:relative;z-index:2}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;border-radius:30px;font-weight:700;font-size:15px;cursor:pointer;border:none;transition:.3s;font-family:'Inter',sans-serif;letter-spacing:.3px}
+.btn-red{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff}
+.btn-red:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(230,57,70,.45)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5)}
+.btn-outline:hover{background:#fff;color:#0d0d1a;transform:translateY(-3px)}
+.btn-sm{padding:11px 24px;font-size:13.5px}
+
+.section{padding:100px 0}
+.section-head{text-align:center;max-width:700px;margin:0 auto 60px}
+.eyebrow{color:#e63946;letter-spacing:3px;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:14px;display:block}
+.section h2{font-size:clamp(38px,5vw,62px);margin-bottom:18px}
+.section-head p{color:#5a6a85;font-size:16px}
+
+.detail-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:110px}
+.detail-row:last-child{margin-bottom:0}
+.detail-row.reverse .detail-img{order:2}
+.detail-img{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(10,10,26,.18)}
+.detail-img img{width:100%;height:380px;object-fit:cover}
+.detail-num{position:absolute;top:20px;left:20px;background:rgba(10,10,26,.85);color:#e63946;font-family:'Bebas Neue',sans-serif;font-size:30px;padding:8px 18px;border-radius:10px;letter-spacing:2px}
+.detail-icon{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,#0d0d1a,#1a1a3e);color:#e63946;display:grid;place-items:center;font-size:24px;margin-bottom:20px}
+.detail-text h3{font-size:36px;margin-bottom:16px}
+.detail-text p{color:#5a6a85;font-size:15.5px;margin-bottom:22px}
+.detail-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.detail-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;font-weight:500}
+.detail-feats i{color:#e63946;margin-top:3px}
+
+.teaser{background:#0d0d1a;color:#fff}
+.teaser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.teaser-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:34px 28px;text-align:center;transition:.3s}
+.teaser-card.featured{border-color:#e63946;background:rgba(230,57,70,.08);transform:scale(1.04)}
+.teaser-card:hover{transform:translateY(-6px)}
+.teaser-card h4{font-size:24px;margin-bottom:6px}
+.teaser-price{font-family:'Bebas Neue',sans-serif;font-size:46px;color:#e63946;margin:14px 0}
+.teaser-price span{font-size:14px;opacity:.6;font-family:'Inter',sans-serif}
+.teaser-card p{font-size:13.5px;opacity:.7;margin-bottom:20px}
+
+.faq-list{max-width:780px;margin:0 auto}
+.faq-item{border-bottom:1px solid #eef1f6;padding:22px 0;cursor:pointer}
+.faq-q{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:16.5px}
+.faq-q i{color:#e63946;transition:.3s}
+.faq-item.open .faq-q i{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:.35s ease;color:#5a6a85;font-size:14.5px;padding-right:30px}
+.faq-item.open .faq-a{max-height:200px;margin-top:14px}
+
+.video-cta{position:relative;padding:140px 0;color:#fff;text-align:center;overflow:hidden;background:linear-gradient(135deg,#0d0d1a,#1a1a3e)}
+.video-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(230,57,70,.18),transparent 60%)}
+.video-cta h2{font-size:clamp(38px,5vw,60px);margin-bottom:18px;position:relative;z-index:2}
+.video-cta p{max-width:640px;margin:0 auto 32px;opacity:.9;position:relative;z-index:2}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+
+.footer{background:#0a0a1a;color:#fff;padding:80px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:60px}
+.footer-brand h3{font-size:36px;letter-spacing:2px;margin-bottom:14px}
+.footer-brand p{font-size:14px;opacity:.6;line-height:1.75;margin-bottom:24px}
+.social-links{display:flex;gap:12px}
+.social-link{width:40px;height:40px;border:1px solid rgba(255,255,255,.15);border-radius:10px;display:grid;place-items:center;font-size:16px;transition:.3s}
+.social-link:hover{background:#e63946;border-color:#e63946}
+.footer-col h5{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:20px;color:#e63946}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{font-size:14px;opacity:.6;transition:.3s}
+.footer-col ul li a:hover{opacity:1;color:#e63946}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.5}
+.footer-bottom a{opacity:1;color:inherit}
+
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:1024px){.teaser-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.burger{display:block}.detail-row{grid-template-columns:1fr;margin-bottom:60px}.detail-row.reverse .detail-img{order:0}.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column;gap:12px;text-align:center}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+
+.logo img{width:180px;height:60px}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav-wrap">
+<a href="index.html" class="logo">
+        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        </a>
+        <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="artists.html">Artists</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="login.html" class="btn-nav-outline">Sign In</a>
+        <a href="signup.html" class="btn-nav-fill">Get Started</a>
+      </div>
+      <button class="burger" id="burgerBtn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="closeMenu"><i class="fa-solid fa-xmark"></i></button>
+  <a href="index.html">Home</a>
+  <a href="services.html" style="color:#e63946">Services</a>
+  <a href="artists.html">Artists</a>
+  <a href="events.html">Events</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html" style="color:#e63946">Sign In</a>
+  <a href="signup.html" style="color:#e63946">Get Started</a>
+</div>
+
+<!-- 1. HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="hero-eyebrow"><i class="fa-solid fa-layer-group"></i> What We Offer</div>
+    <h1>EVERYTHING MUSIC.<br>UNDER ONE ROOF.</h1>
+    <p>Six powerful services, one seamless platform. Whatever stage you're at — bedroom producer or arena headliner — BeatFlow has the tools to take you further.</p>
+  </div>
+</section>
+
+<!-- 2. MUSIC STREAMING -->
+<section class="section">
+  <div class="container">
+    <div class="detail-row reveal">
+      <div class="detail-img">
+        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=700&q=80" alt="Music Streaming">
+        <div class="detail-num">01</div>
+      </div>
+      <div class="detail-text">
+        <div class="detail-icon"><i class="fa-solid fa-record-vinyl"></i></div>
+        <h3>Music Streaming</h3>
+        <p>Lossless, high-fidelity streaming across every genre — Bollywood, indie, hip-hop, classical, and everything in between — delivered with near-zero buffering on any device.</p>
+        <ul class="detail-feats">
+          <li><i class="fa-solid fa-circle-check"></i> Lossless audio up to 320kbps</li>
+          <li><i class="fa-solid fa-circle-check"></i> Offline downloads & smart playlists</li>
+          <li><i class="fa-solid fa-circle-check"></i> AI-powered personalized recommendations</li>
+        </ul>
+        <a href="signup.html" class="btn btn-red btn-sm">Start Streaming</a>
+      </div>
+    </div>
+
+    <!-- 3. ARTIST MANAGEMENT -->
+    <div class="detail-row reverse reveal">
+      <div class="detail-img">
+        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=700&q=80" alt="Artist Management">
+        <div class="detail-num">02</div>
+      </div>
+      <div class="detail-text">
+        <div class="detail-icon"><i class="fa-solid fa-microphone-lines"></i></div>
+        <h3>Artist Management</h3>
+        <p>Manage your entire artist career from one dashboard — upload tracks, build your profile, track royalties, and message fans directly without a label in between.</p>
+        <ul class="detail-feats">
+          <li><i class="fa-solid fa-circle-check"></i> Unlimited track and album uploads</li>
+          <li><i class="fa-solid fa-circle-check"></i> Verified artist badge & custom storefront</li>
+          <li><i class="fa-solid fa-circle-check"></i> Direct fan messaging and broadcast tools</li>
+        </ul>
+        <a href="signup.html" class="btn btn-red btn-sm">Claim Your Profile</a>
+      </div>
+    </div>
+
+    <!-- 4. EVENT TICKETING -->
+    <div class="detail-row reveal">
+      <div class="detail-img">
+        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=700&q=80" alt="Event Ticketing">
+        <div class="detail-num">03</div>
+      </div>
+      <div class="detail-text">
+        <div class="detail-icon"><i class="fa-solid fa-ticket"></i></div>
+        <h3>Event Ticketing</h3>
+        <p>Sell out your next show with seamless ticket booking, QR-based entry, and real-time sales tracking — built for concerts, festivals, and private events of any size.</p>
+        <ul class="detail-feats">
+          <li><i class="fa-solid fa-circle-check"></i> Instant QR-code check-in at venue</li>
+          <li><i class="fa-solid fa-circle-check"></i> Tiered pricing and early-bird discounts</li>
+          <li><i class="fa-solid fa-circle-check"></i> Live sales dashboard for organizers</li>
+        </ul>
+        <a href="events.html" class="btn btn-red btn-sm">Explore Events</a>
+      </div>
+    </div>
+
+    <!-- 5. LIVE STREAMING -->
+    <div class="detail-row reverse reveal">
+      <div class="detail-img">
+        <img src="https://images.unsplash.com/photo-1581368135153-a506cf86b0b1?w=700&q=80" alt="Live Streaming">
+        <div class="detail-num">04</div>
+      </div>
+      <div class="detail-text">
+        <div class="detail-icon"><i class="fa-solid fa-broadcast-tower"></i></div>
+        <h3>Live Streaming</h3>
+        <p>Broadcast performances to fans anywhere in the world with ultra-low latency, real-time chat, virtual tipping, and built-in monetization — no third-party setup required.</p>
+        <ul class="detail-feats">
+          <li><i class="fa-solid fa-circle-check"></i> HD broadcast with sub-second latency</li>
+          <li><i class="fa-solid fa-circle-check"></i> Live tipping and paid virtual front-row</li>
+          <li><i class="fa-solid fa-circle-check"></i> Automatic stream recording & replay</li>
+        </ul>
+        <a href="signup.html" class="btn btn-red btn-sm">Go Live</a>
+      </div>
+    </div>
+
+    <!-- 6. ANALYTICS & ROYALTIES -->
+    <div class="detail-row reveal">
+      <div class="detail-img">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="Analytics">
+        <div class="detail-num">05</div>
+      </div>
+      <div class="detail-text">
+        <div class="detail-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Analytics & Royalties</h3>
+        <p>Get deep insight into plays, listener demographics, and event revenue — paired with automated royalty payouts deposited directly into your bank account every month.</p>
+        <ul class="detail-feats">
+          <li><i class="fa-solid fa-circle-check"></i> Real-time play & follower analytics</li>
+          <li><i class="fa-solid fa-circle-check"></i> Automated monthly royalty payouts</li>
+          <li><i class="fa-solid fa-circle-check"></i> Exportable revenue reports</li>
+        </ul>
+        <a href="signup.html" class="btn btn-red btn-sm">See Your Numbers</a>
+      </div>
+    </div>
+
+    <!-- 7. MERCH STORE -->
+    <div class="detail-row reverse reveal">
+      <div class="detail-img">
+        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=700&q=80" alt="Merch Store">
+        <div class="detail-num">06</div>
+      </div>
+      <div class="detail-text">
+        <div class="detail-icon"><i class="fa-solid fa-store"></i></div>
+        <h3>Merch Store</h3>
+        <p>Launch your own branded storefront in minutes — sell merchandise, exclusive content, and fan subscriptions directly through your BeatFlow artist profile.</p>
+        <ul class="detail-feats">
+          <li><i class="fa-solid fa-circle-check"></i> Built-in storefront, no coding needed</li>
+          <li><i class="fa-solid fa-circle-check"></i> Exclusive fan-only content tiers</li>
+          <li><i class="fa-solid fa-circle-check"></i> Integrated payments and shipping</li>
+        </ul>
+        <a href="signup.html" class="btn btn-red btn-sm">Open Your Store</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. PRICING TEASER -->
+<section class="teaser section">
+  <div class="container">
+    <div class="section-head reveal" style="color:#fff">
+      <span class="eyebrow">Simple Pricing</span>
+      <h2 style="color:#fff">Plans for Every Stage</h2>
+      <p style="color:rgba(255,255,255,.7)">Start free, upgrade as your audience grows.</p>
+    </div>
+    <div class="teaser-grid">
+      <div class="teaser-card reveal">
+        <h4>Listener</h4>
+        <div class="teaser-price">₹0<span>/mo</span></div>
+        <p>Stream music, follow artists, and book event tickets.</p>
+        <a href="pricing.html" class="btn btn-outline btn-sm">View Plan</a>
+      </div>
+      <div class="teaser-card featured reveal">
+        <h4>Artist Pro</h4>
+        <div class="teaser-price">₹499<span>/mo</span></div>
+        <p>Full artist toolkit — uploads, analytics, royalties, and merch.</p>
+        <a href="pricing.html" class="btn btn-red btn-sm">View Plan</a>
+      </div>
+      <div class="teaser-card reveal">
+        <h4>Label & Enterprise</h4>
+        <div class="teaser-price">Custom</div>
+        <p>Multi-artist management with dedicated account support.</p>
+        <a href="pricing.html" class="btn btn-outline btn-sm">View Plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently Asked</h2>
+      <p>Quick answers about our services. Still curious? Reach out anytime.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">Do I need a label to use BeatFlow? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a">Not at all. BeatFlow is built for independent artists. You can upload, distribute, and monetize your music without any label involvement.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">How fast do I get paid royalties? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a">Royalties are calculated daily and paid out automatically to your linked bank account on the 1st of every month.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can I sell tickets for free events too? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a">Yes, free RSVP events are supported alongside paid ticketing, with the same QR check-in system.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Is live streaming included in every plan? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a">Live streaming is available from the Artist Pro plan onward. Listener accounts can watch but not broadcast.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. CTA -->
+<section class="video-cta">
+  <div class="container">
+    <span class="eyebrow">Ready When You Are</span>
+    <h2>PICK YOUR SERVICE. START TODAY.</h2>
+    <p>No setup fees, no long contracts. Just sign up and start streaming, selling, or performing.</p>
+    <div class="hero-btns">
+      <a href="signup.html" class="btn btn-red"><i class="fa-solid fa-rocket"></i> Get Started Free</a>
+      <a href="pricing.html" class="btn btn-outline">Compare Plans</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        </a>
+        <p>India's premier music & entertainment platform. Empowering artists, connecting fans, and fueling the next generation of live experiences since 2020.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-spotify"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="services.html">Music Streaming</a></li>
+          <li><a href="services.html">Live Events</a></li>
+          <li><a href="services.html">Artist Tools</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Artist FAQ</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BeatFlow Entertainment Pvt. Ltd. All rights reserved.</span>
+      <span>Made with <i class="fa-solid fa-heart" style="color:#e63946"></i> for Music Lovers</span>
+    </div>
+  </div>
+</footer> 
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+document.getElementById('burgerBtn').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html> 

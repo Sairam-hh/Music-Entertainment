@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact Us — BeatFlow Music & Entertainment</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#fff;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;line-height:1.1;letter-spacing:1px}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:.4s;background:transparent}
+.nav.scrolled{background:rgba(10,10,26,.95);backdrop-filter:blur(12px);box-shadow:0 4px 30px rgba(0,0,0,.3);padding:12px 0}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;display:flex;align-items:center;gap:10px;letter-spacing:2px}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#e63946,#ff006e);border-radius:8px;display:grid;place-items:center;font-size:15px;color:#fff}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.85);font-weight:500;font-size:14px;position:relative;transition:.3s}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:#e63946;transition:.3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.btn-nav-outline{color:#fff;border:1.5px solid rgba(255,255,255,.4);padding:9px 22px;border-radius:25px;font-size:13.5px;font-weight:600;transition:.3s}
+.btn-nav-outline:hover{border-color:#e63946;color:#e63946}
+.btn-nav-fill{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;padding:9px 22px;border-radius:25px;font-size:13.5px;font-weight:600;transition:.3s}
+.btn-nav-fill:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(230,57,70,.4)}
+.burger{display:none;color:#fff;font-size:22px;background:none;border:none;cursor:pointer}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,10,26,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:#fff;font-size:26px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px}
+.mobile-menu a:hover{color:#e63946}
+.mobile-close{position:absolute;top:20px;right:24px;color:#fff;font-size:26px;background:none;border:none;cursor:pointer}
+.page-hero{position:relative;padding:160px 0 100px;color:#fff;text-align:center;overflow:hidden}
+.page-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.page-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,26,.9),rgba(10,10,26,.7));z-index:-1}
+.page-hero .eyebrow{color:#e63946;letter-spacing:4px;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:14px;display:block}
+.page-hero h1{font-size:clamp(44px,7vw,80px);margin-bottom:18px}
+.page-hero p{max-width:600px;margin:0 auto;font-size:16px;opacity:.88;line-height:1.75}
+.breadcrumb{background:#f7f8fc;padding:14px 0;border-bottom:1px solid #eef1f6}
+.breadcrumb-wrap{display:flex;align-items:center;gap:8px;font-size:13px;color:#7a8aa5}
+.breadcrumb-wrap a{color:#7a8aa5;transition:.2s}
+.breadcrumb-wrap a:hover{color:#e63946}
+.breadcrumb-wrap i{font-size:10px}
+.breadcrumb-wrap span{color:#0d0d1a;font-weight:600}
+.eyebrow{color:#e63946;letter-spacing:3px;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:14px;display:block}
+
+/* CONTACT INFO CARDS */
+.info-section{padding:80px 0 0}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:70px}
+.info-card{background:#fff;border:1px solid #eef1f6;border-radius:18px;padding:32px 24px;text-align:center;transition:.4s;position:relative;overflow:hidden}
+.info-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#e63946,#ff006e);transform:scaleX(0);transform-origin:left;transition:.4s}
+.info-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(10,10,26,.1);border-color:transparent}
+.info-card:hover::before{transform:scaleX(1)}
+.info-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#fdeef0,#ffe0e5);display:grid;place-items:center;margin:0 auto 18px;font-size:24px;color:#e63946}
+.info-card h4{font-size:24px;margin-bottom:10px}
+.info-card p{color:#5a6a85;font-size:14px;line-height:1.65;margin-bottom:14px}
+.info-card a{display:inline-flex;align-items:center;gap:6px;color:#e63946;font-weight:600;font-size:14px;transition:.2s}
+.info-card a:hover{gap:10px}
+
+/* MAIN CONTACT SECTION */
+.contact-section{padding:0 0 90px}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+
+/* FORM SIDE */
+.form-card{background:#fff;border:1px solid #eef1f6;border-radius:20px;padding:40px}
+.form-card h3{font-size:32px;margin-bottom:8px}
+.form-card>p{color:#5a6a85;font-size:14.5px;margin-bottom:28px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#0d0d1a;margin-bottom:7px;letter-spacing:.3px}
+.input-wrap{position:relative}
+.input-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#7a8aa5;font-size:14px;pointer-events:none}
+.input-wrap input,.input-wrap select,.input-wrap textarea{width:100%;padding:13px 14px 13px 40px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;color:#0d0d1a;background:#fff;transition:.3s;outline:none}
+.input-wrap textarea{padding-top:13px;resize:vertical;min-height:130px}
+.input-wrap select{cursor:pointer;appearance:none}
+.input-wrap input:focus,.input-wrap select:focus,.input-wrap textarea:focus{border-color:#e63946;box-shadow:0 0 0 4px rgba(230,57,70,.1)}
+.input-wrap input.error,.input-wrap select.error,.input-wrap textarea.error{border-color:#e74c3c}
+.err-msg{color:#e74c3c;font-size:12px;margin-top:5px;display:none;align-items:center;gap:5px}
+.err-msg.show{display:flex}
+.alert{padding:13px 16px;border-radius:10px;font-size:14px;font-weight:500;margin-bottom:20px;display:none;align-items:center;gap:10px}
+.alert.show{display:flex}
+.alert-success{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.3);color:#1e8449}
+.btn-submit{width:100%;padding:15px;border-radius:10px;background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;border:none;font-family:'Inter',sans-serif;font-size:15.5px;font-weight:700;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(230,57,70,.4)}
+.btn-submit.loading{pointer-events:none;opacity:.8}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+
+/* INFO SIDE */
+.info-side h3{font-size:36px;margin-bottom:14px}
+.info-side>p{color:#5a6a85;font-size:15px;line-height:1.75;margin-bottom:32px}
+.contact-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px}
+.ci-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#0d0d1a,#1a1a3e);display:grid;place-items:center;color:#e63946;font-size:18px;flex-shrink:0}
+.ci-label{font-size:12px;color:#7a8aa5;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.ci-val{font-size:15px;font-weight:600;color:#0d0d1a}
+.ci-sub{font-size:13px;color:#7a8aa5}
+.office-img{border-radius:16px;overflow:hidden;margin-bottom:28px;height:220px}
+.office-img img{width:100%;height:100%;object-fit:cover}
+.social-section h5{font-family:'Bebas Neue',sans-serif;font-size:22px;margin-bottom:14px;letter-spacing:.5px}
+.social-row{display:flex;gap:12px;flex-wrap:wrap}
+.soc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:25px;font-size:13.5px;font-weight:600;border:1.5px solid #e2e8f0;transition:.3s;color:#0d0d1a}
+.soc-btn:hover{border-color:#e63946;color:#e63946;transform:translateY(-2px)}
+.soc-btn i{font-size:15px}
+
+/* MAP */
+.map-section{background:#f7f8fc;padding:70px 0}
+.map-section h2{font-size:38px;margin-bottom:6px}
+.map-section>div>p{color:#5a6a85;font-size:15px;margin-bottom:28px}
+.map-embed{border-radius:18px;overflow:hidden;border:2px solid #eef1f6;box-shadow:0 16px 40px rgba(10,10,26,.1)}
+.map-embed iframe{width:100%;height:380px;border:none;display:block}
+
+/* FOOTER */
+.footer{background:#0a0a1a;color:#fff;padding:70px 0 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:50px}
+.footer-brand h3{font-size:32px;letter-spacing:2px;margin-bottom:12px}
+.footer-brand p{font-size:14px;opacity:.6;line-height:1.75;margin-bottom:22px}
+.social-links{display:flex;gap:10px}
+.social-link{width:38px;height:38px;border:1px solid rgba(255,255,255,.15);border-radius:9px;display:grid;place-items:center;font-size:15px;transition:.3s}
+.social-link:hover{background:#e63946;border-color:#e63946}
+.footer-col h5{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:18px;color:#e63946}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{font-size:14px;opacity:.6;transition:.3s}
+.footer-col ul li a:hover{opacity:1;color:#e63946}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:26px;display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.5}
+.reveal{opacity:0;transform:translateY(28px);transition:all .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:1024px){.contact-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.burger{display:block}.info-grid{grid-template-columns:1fr}.form-row-2{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+
+.logo img{width:180px;height:60px}
+
+</style>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav-wrap">
+        <a href="index.html" class="logo">
+        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        </a>
+        <ul class="nav-links">
+        <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+        <li><a href="artists.html">Artists</a></li>
+        <li><a href="events.html">Events</a></li><li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About</a></li><li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="nav-cta"><a href="login.html" class="btn-nav-outline">Sign In</a><a href="signup.html" class="btn-nav-fill">Get Started</a></div>
+      <button class="burger" id="burgerBtn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="closeMenu"><i class="fa-solid fa-xmark"></i></button>
+  <a href="index.html">Home</a><a href="services.html">Services</a><a href="events.html">Events</a>
+  <a href="pricing.html">Pricing</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="login.html" style="color:#e63946">Sign In</a><a href="signup.html" style="color:#e63946">Get Started</a>
+</div>
+
+<section class="page-hero">
+  <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-at-a-music-concert-with-lights-4809-large.mp4" type="video/mp4"></video>
+  <div class="container">
+    <span class="eyebrow">Get in Touch</span>
+    <h1>WE'D LOVE TO HEAR FROM YOU</h1>
+    <p>Whether you're an artist, event organizer, or fan — our team is here to help you every step of the way.</p>
+  </div>
+</section>
+<div class="breadcrumb"><div class="container"><div class="breadcrumb-wrap"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>Contact Us</span></div></div></div>
+
+<!-- INFO CARDS -->
+<section class="info-section">
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+        <h4>Email Us</h4>
+        <p>For general enquiries, artist onboarding, and partnership discussions.</p>
+        <a href="mailto:hello@beatflow.in">hello@beatflow.in <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+        <h4>Call Us</h4>
+        <p>Our support team is available Monday to Saturday, 9 AM to 7 PM IST.</p>
+        <a href="tel:+918008001234">+91 800-800-1234 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <h4>Visit Us</h4>
+        <p>BeatFlow HQ, Level 8, Cyber Towers, Hitech City, Hyderabad — 500081</p>
+        <a href="#">Get Directions <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM + INFO -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- FORM -->
+      <div class="form-card reveal">
+        <h3>Send Us a Message</h3>
+        <p>Fill in the form below and our team will get back to you within 24 hours.</p>
+
+        <div class="alert alert-success" id="successAlert">
+          <i class="fa-solid fa-circle-check"></i>
+          Your message has been sent! We'll get back to you within 24 hours.
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>First Name</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="firstName" placeholder="Aryan">
+              </div>
+              <div class="err-msg" id="firstNameErr"><i class="fa-solid fa-circle-exclamation"></i> Required</div>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="lastName" placeholder="Verma">
+              </div>
+              <div class="err-msg" id="lastNameErr"><i class="fa-solid fa-circle-exclamation"></i> Required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" id="email" placeholder="you@example.com">
+            </div>
+            <div class="err-msg" id="emailErr"><i class="fa-solid fa-circle-exclamation"></i> Enter a valid email</div>
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number (Optional)</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-phone"></i>
+              <input type="tel" id="phone" placeholder="+91 98765 43210">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>I am a…</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-user-tag"></i>
+              <select id="subject">
+                <option value="">Select your role</option>
+                <option>Fan / Listener</option>
+                <option>Artist / Musician</option>
+                <option>Event Organizer</option>
+                <option>Label / Agency</option>
+                <option>Press / Media</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="err-msg" id="subjectErr"><i class="fa-solid fa-circle-exclamation"></i> Please select an option</div>
+          </div>
+
+          <div class="form-group">
+            <label>Your Message</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-comment" style="top:18px;transform:none"></i>
+              <textarea id="message" placeholder="Tell us how we can help you…"></textarea>
+            </div>
+            <div class="err-msg" id="messageErr"><i class="fa-solid fa-circle-exclamation"></i> Please write a message (min 20 characters)</div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- INFO SIDE -->
+      <div class="info-side reveal">
+        <div class="office-img">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="BeatFlow Office">
+        </div>
+        <span class="eyebrow">Our Office</span>
+        <h3>Come Visit Us in Hyderabad</h3>
+        <p>We're based in the heart of India's tech corridor — Hitech City, Hyderabad. Drop by, meet the team, and feel the vibe.</p>
+
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="ci-label">Address</div>
+            <div class="ci-val">Level 8, Cyber Towers</div>
+            <div class="ci-sub">Hitech City, Hyderabad — 500081, Telangana</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <div class="ci-label">Working Hours</div>
+            <div class="ci-val">Monday – Saturday</div>
+            <div class="ci-sub">9:00 AM – 7:00 PM IST</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <div class="ci-label">Artist Support</div>
+            <div class="ci-val">artists@beatflow.in</div>
+            <div class="ci-sub">Priority response within 6 hours</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <div>
+            <div class="ci-label">Partnerships & Press</div>
+            <div class="ci-val">press@beatflow.in</div>
+            <div class="ci-sub">For media enquiries and collaborations</div>
+          </div>
+        </div>
+
+        <div class="social-section">
+          <h5>Follow BeatFlow</h5>
+          <div class="social-row">
+            <a href="#" class="soc-btn"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="#" class="soc-btn"><i class="fa-brands fa-twitter"></i> Twitter/X</a>
+            <a href="#" class="soc-btn"><i class="fa-brands fa-youtube"></i> YouTube</a>
+            <a href="#" class="soc-btn"><i class="fa-brands fa-spotify"></i> Spotify</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="container">
+    <div style="margin-bottom:28px">
+      <span class="eyebrow">Find Us</span>
+      <h2>BeatFlow HQ — Hyderabad</h2>
+      <p>Cyber Towers, Level 8, Hitech City, Hyderabad, Telangana 500081</p>
+    </div>
+    <div class="map-embed reveal">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2!2d78.3739!3d17.4474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93e3c6e7b1a7%3A0x1234!2sCyber+Towers%2C+Hitech+City%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1622000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        </a>
+        <h3>BEATFLOW</h3>
+        <p>India's premier music & entertainment platform. Empowering artists, connecting fans since 2020.</p>
+        <div class="social-links"><a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a><a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a><a href="#" class="social-link"><i class="fa-brands fa-youtube"></i></a><a href="#" class="social-link"><i class="fa-brands fa-spotify"></i></a></div>
+      </div>
+      <div class="footer-col"><h5>Platform</h5><ul><li><a href="services.html">Music Streaming</a></li><li><a href="services.html">Live Events</a></li><li><a href="services.html">Artist Tools</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div class="footer-col"><h5>Support</h5><ul><li><a href="#">Help Center</a></li><li><a href="#">Artist FAQ</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 BeatFlow Entertainment Pvt. Ltd. All rights reserved.</span><span>Made with <i class="fa-solid fa-heart" style="color:#e63946"></i> for Music</span></div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+document.getElementById('burgerBtn').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let valid = true;
+  const fields = {
+    firstName: { el: document.getElementById('firstName'), err: 'firstNameErr', check: v => v.trim().length >= 2 },
+    lastName: { el: document.getElementById('lastName'), err: 'lastNameErr', check: v => v.trim().length >= 2 },
+    email: { el: document.getElementById('email'), err: 'emailErr', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+    subject: { el: document.getElementById('subject'), err: 'subjectErr', check: v => v !== '' },
+    message: { el: document.getElementById('message'), err: 'messageErr', check: v => v.trim().length >= 20 }
+  };
+  document.querySelectorAll('.err-msg').forEach(m => m.classList.remove('show'));
+  for (const [, f] of Object.entries(fields)) {
+    if (!f.check(f.el.value)) { f.el.classList.add('error'); document.getElementById(f.err).classList.add('show'); valid = false; }
+    else { f.el.classList.remove('error'); }
+  }
+  if (!valid) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.innerHTML = '<div class="spinner"></div> Sending…';
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+    document.getElementById('successAlert').classList.add('show');
+    this.reset();
+    setTimeout(() => document.getElementById('successAlert').classList.remove('show'), 5000);
+  }, 1800);
+});
+
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold:.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artists — BeatFlow | Discover & Support India's Music Talent</title>
+<meta name="description" content="Discover featured artists, trending tracks, genres, and success stories on BeatFlow. Join thousands of independent artists building their career on our platform.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#fff;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;line-height:1.1;letter-spacing:1px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:.4s;background:rgba(10,10,26,.95);backdrop-filter:blur(12px)}
+.nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.3);padding:12px 0}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#fff;display:flex;align-items:center;gap:10px;letter-spacing:2px}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#e63946,#ff006e);border-radius:8px;display:grid;place-items:center;font-size:16px;color:#fff}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.85);font-weight:500;font-size:14px;position:relative;transition:.3s;letter-spacing:.5px}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:#e63946;transition:.3s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.btn-nav-outline{color:#fff;border:1.5px solid rgba(255,255,255,.4);padding:9px 22px;border-radius:25px;font-size:13.5px;font-weight:600;transition:.3s}
+.btn-nav-outline:hover{border-color:#e63946;color:#e63946}
+.btn-nav-fill{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;padding:9px 22px;border-radius:25px;font-size:13.5px;font-weight:600;transition:.3s}
+.btn-nav-fill:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(230,57,70,.4)}
+.burger{display:none;color:#fff;font-size:24px;background:none;border:none;cursor:pointer}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,26,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:#fff;font-size:28px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;transition:.3s}
+.mobile-menu a:hover{color:#e63946}
+.mobile-close{position:absolute;top:20px;right:24px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer}
+
+.page-hero{position:relative;padding:170px 0 100px;background:linear-gradient(135deg,#0d0d1a,#1a1a3e);color:#fff;text-align:center;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(230,57,70,.25),transparent 70%);border-radius:50%}
+.page-hero::after{content:'';position:absolute;bottom:-50%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,110,.15),transparent 70%);border-radius:50%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;color:#e63946;letter-spacing:4px;font-size:12px;font-weight:700;margin-bottom:20px;text-transform:uppercase;background:rgba(230,57,70,.1);border:1px solid rgba(230,57,70,.3);padding:8px 20px;border-radius:30px;position:relative;z-index:2}
+.page-hero h1{font-size:clamp(44px,7vw,80px);margin-bottom:18px;position:relative;z-index:2}
+.page-hero p{max-width:650px;margin:0 auto;opacity:.85;font-size:16px;position:relative;z-index:2}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;border-radius:30px;font-weight:700;font-size:15px;cursor:pointer;border:none;transition:.3s;font-family:'Inter',sans-serif;letter-spacing:.3px}
+.btn-red{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff}
+.btn-red:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(230,57,70,.45)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5)}
+.btn-outline:hover{background:#fff;color:#0d0d1a;transform:translateY(-3px)}
+.btn-sm{padding:11px 24px;font-size:13.5px}
+
+.stats{background:#0d0d1a;color:#fff;padding:70px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:60px;color:#e63946;line-height:1;transition:all .4s ease;display:inline-block;cursor:pointer;letter-spacing:1px}
+.stat-num:hover{transform:translateY(-8px) scale(1.1);text-shadow:0 0 20px rgba(230,57,70,.6),0 0 40px rgba(230,57,70,.3)}
+.stat-lbl{margin-top:10px;opacity:.75;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+
+.section{padding:100px 0}
+.section-head{text-align:center;max-width:700px;margin:0 auto 60px}
+.eyebrow{color:#e63946;letter-spacing:3px;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:14px;display:block}
+.section h2{font-size:clamp(38px,5vw,62px);margin-bottom:18px}
+.section-head p{color:#5a6a85;font-size:16px}
+
+/* FILTER TABS */
+.filter-tabs{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:50px}
+.filter-tab{padding:10px 24px;border-radius:25px;border:1.5px solid #eef1f6;font-size:13.5px;font-weight:600;cursor:pointer;transition:.3s;background:#fff;color:#0d0d1a}
+.filter-tab.active,.filter-tab:hover{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;border-color:transparent}
+
+/* ARTISTS GRID */
+.artists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.artist-card{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;background:#0d0d1a}
+.artist-card img{width:100%;height:340px;object-fit:cover;transition:.5s;opacity:.85}
+.artist-card:hover img{transform:scale(1.06);opacity:1}
+.artist-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(10,10,26,.95));display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.artist-overlay h3{font-size:32px;color:#fff;margin-bottom:4px}
+.artist-overlay span{color:#e63946;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:2px}
+.artist-followers{color:rgba(255,255,255,.6);font-size:12.5px;margin-top:8px;display:flex;align-items:center;gap:6px}
+.artist-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;background:rgba(230,57,70,.9);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:22px;transition:.4s}
+.artist-card:hover .artist-play{transform:translate(-50%,-50%) scale(1)}
+
+/* GENRES */
+.genres{background:#f7f8fc}
+.genre-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.genre-card{background:#fff;border-radius:14px;padding:30px 14px;text-align:center;border:1px solid #eef1f6;transition:.3s;cursor:pointer}
+.genre-card:hover{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff;transform:translateY(-6px);border-color:transparent}
+.genre-card i{font-size:26px;color:#e63946;margin-bottom:10px;transition:.3s}
+.genre-card:hover i{color:#fff}
+.genre-card span{font-size:13.5px;font-weight:600}
+
+/* CHARTS / TRENDING TRACKS */
+.chart-list{max-width:780px;margin:0 auto}
+.chart-row{display:flex;align-items:center;gap:20px;padding:16px 20px;border-radius:14px;transition:.3s;cursor:pointer}
+.chart-row:hover{background:#f7f8fc}
+.chart-rank{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#e63946;width:40px;flex-shrink:0}
+.chart-art{width:56px;height:56px;border-radius:10px;overflow:hidden;flex-shrink:0}
+.chart-art img{width:100%;height:100%;object-fit:cover}
+.chart-info{flex:1;min-width:0}
+.chart-info h5{font-size:16px;margin-bottom:2px}
+.chart-info span{font-size:13px;color:#7a8aa5}
+.chart-plays{font-size:13px;color:#5a6a85;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.chart-plays i{color:#e63946}
+
+/* SPOTLIGHT */
+.spotlight{background:#0d0d1a;color:#fff}
+.spotlight-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:50px;align-items:center}
+.spotlight-img{position:relative;border-radius:20px;overflow:hidden}
+.spotlight-img img{width:100%;height:460px;object-fit:cover}
+.spotlight-badge{position:absolute;top:20px;left:20px;background:#e63946;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px}
+.spotlight-text h3{font-size:48px;margin-bottom:6px}
+.spotlight-text>span{color:#e63946;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:2px;display:block;margin-bottom:18px}
+.spotlight-text p{opacity:.8;font-size:15px;margin-bottom:26px}
+.spotlight-stats{display:flex;gap:36px;margin-bottom:30px;flex-wrap:wrap}
+.spotlight-stats div h4{font-size:30px;color:#e63946}
+.spotlight-stats div span{font-size:12.5px;opacity:.65;text-transform:uppercase;letter-spacing:1px}
+
+/* SUCCESS STORIES */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.test-card{position:relative;overflow:hidden;background:#fff;border-radius:18px;padding:30px;transition:all .45s cubic-bezier(.2,.8,.2,1);border:1px solid rgba(10,10,26,.08)}
+.test-card:hover{transform:translateY(-10px);box-shadow:0 25px 60px rgba(10,10,26,.14)}
+.test-stars{color:#e63946;font-size:14px;margin-bottom:14px;display:flex;gap:4px}
+.test-text{color:#5a6a85;font-size:14.5px;line-height:1.75;margin-bottom:20px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e63946,#ff006e);display:grid;place-items:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0}
+.test-name{font-weight:700;font-size:15px}
+.test-role{font-size:12.5px;color:#7a8aa5}
+
+/* JOIN AS ARTIST */
+.join-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.join-card{background:#f7f8fc;border-radius:16px;padding:32px 26px;text-align:center;transition:.4s}
+.join-card:hover{background:#0d0d1a;color:#fff;transform:translateY(-6px)}
+.join-card i{font-size:30px;color:#e63946;margin-bottom:16px}
+.join-card h4{font-size:20px;margin-bottom:10px}
+.join-card p{font-size:13.5px;color:#5a6a85;transition:.4s}
+.join-card:hover p{color:rgba(255,255,255,.75)}
+
+.video-cta{position:relative;padding:140px 0;color:#fff;text-align:center;overflow:hidden;background:linear-gradient(135deg,#0d0d1a,#1a1a3e)}
+.video-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(230,57,70,.18),transparent 60%)}
+.video-cta h2{font-size:clamp(38px,5vw,60px);margin-bottom:18px;position:relative;z-index:2}
+.video-cta p{max-width:640px;margin:0 auto 32px;opacity:.9;position:relative;z-index:2}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+
+.footer{background:#0a0a1a;color:#fff;padding:80px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:60px}
+.footer-brand h3{font-size:36px;letter-spacing:2px;margin-bottom:14px}
+.footer-brand p{font-size:14px;opacity:.6;line-height:1.75;margin-bottom:24px}
+.social-links{display:flex;gap:12px}
+.social-link{width:40px;height:40px;border:1px solid rgba(255,255,255,.15);border-radius:10px;display:grid;place-items:center;font-size:16px;transition:.3s}
+.social-link:hover{background:#e63946;border-color:#e63946}
+.footer-col h5{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:20px;color:#e63946}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul li a{font-size:14px;opacity:.6;transition:.3s}
+.footer-col ul li a:hover{opacity:1;color:#e63946}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.5}
+.footer-bottom a{opacity:1;color:inherit}
+
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:1024px){.artists-grid,.join-grid{grid-template-columns:repeat(2,1fr)}.genre-grid{grid-template-columns:repeat(3,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.spotlight-grid{grid-template-columns:1fr;gap:30px}.spotlight-img img{height:340px}}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.burger{display:block}.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column;gap:12px;text-align:center}.test-grid{grid-template-columns:1fr}.chart-row{gap:12px;padding:12px}.chart-info h5{font-size:14px}}
+@media(max-width:480px){.artists-grid,.join-grid{grid-template-columns:1fr}.genre-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr}.spotlight-stats{gap:22px}}
+
+.logo img{width:180px;height:60px}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav-wrap">
+<a href="index.html" class="logo">
+        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        </a>      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="artists.html" class="active">Artists</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="login.html" class="btn-nav-outline">Sign In</a>
+        <a href="signup.html" class="btn-nav-fill">Get Started</a>
+      </div>
+      <button class="burger" id="burgerBtn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="closeMenu"><i class="fa-solid fa-xmark"></i></button>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="artists.html" style="color:#e63946">Artists</a>
+  <a href="events.html">Events</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html" style="color:#e63946">Sign In</a>
+  <a href="signup.html" style="color:#e63946">Get Started</a>
+</div>
+
+<!-- 1. HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="hero-eyebrow"><i class="fa-solid fa-microphone-lines"></i> Talent That Moves You</div>
+    <h1>DISCOVER YOUR<br>NEXT FAVORITE ARTIST.</h1>
+    <p>From rising bedroom producers to stadium-filling headliners — explore the artists shaping India's sound, and support them directly.</p>
+  </div>
+</section>
+
+<!-- 2. STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div><div class="stat-num" data-target="50">0</div><span>K+</span><div class="stat-lbl">Artists on Platform</div></div>
+      <div><div class="stat-num" data-target="12">0</div><span>M+</span><div class="stat-lbl">Monthly Listeners</div></div>
+      <div><div class="stat-num" data-target="200">0</div><span>K+</span><div class="stat-lbl">Tracks Uploaded</div></div>
+      <div><div class="stat-num" data-target="80">0</div><span>%</span><div class="stat-lbl">Revenue Kept by Artists</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FILTER + FEATURED ARTISTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Featured Artists</span>
+      <h2>Talent That Moves You</h2>
+      <p>Discover the hottest artists on BeatFlow — from rising stars to established legends.</p>
+    </div>
+    <div class="filter-tabs reveal">
+      <div class="filter-tab active">All</div>
+      <div class="filter-tab">Electronic</div>
+      <div class="filter-tab">Hip-Hop</div>
+      <div class="filter-tab">Indie & Folk</div>
+      <div class="filter-tab">Classical</div>
+      <div class="filter-tab">Bollywood</div>
+    </div>
+    <div class="artists-grid">
+      <div class="artist-card reveal">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="Aryan Beats">
+        <div class="artist-overlay">
+          <h3>Aryan Beats</h3>
+          <span>Electronic · Hip-Hop</span>
+          <div class="artist-followers"><i class="fa-solid fa-user-group"></i> 2.1M Followers</div>
+        </div>
+        <div class="artist-play"><i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="artist-card reveal">
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" alt="Priya Melodics">
+        <div class="artist-overlay">
+          <h3>Priya Melodics</h3>
+          <span>Indie · Folk · Soul</span>
+          <div class="artist-followers"><i class="fa-solid fa-user-group"></i> 980K Followers</div>
+        </div>
+        <div class="artist-play"><i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="artist-card reveal">
+        <img src="https://images.unsplash.com/photo-1571266028243-d220c6a3fc84?w=600&q=80" alt="DJ Karan Storm">
+        <div class="artist-overlay">
+          <h3>DJ Karan Storm</h3>
+          <span>EDM · Progressive House</span>
+          <div class="artist-followers"><i class="fa-solid fa-user-group"></i> 1.6M Followers</div>
+        </div>
+        <div class="artist-play"><i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="artist-card reveal">
+        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&q=80" alt="Meera Soundwave">
+        <div class="artist-overlay">
+          <h3>Meera Soundwave</h3>
+          <span>Classical Fusion</span>
+          <div class="artist-followers"><i class="fa-solid fa-user-group"></i> 540K Followers</div>
+        </div>
+        <div class="artist-play"><i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="artist-card reveal">
+        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=600&q=80" alt="Vikram Raps">
+        <div class="artist-overlay">
+          <h3>Vikram Raps</h3>
+          <span>Hip-Hop · Rap</span>
+          <div class="artist-followers"><i class="fa-solid fa-user-group"></i> 3.2M Followers</div>
+        </div>
+        <div class="artist-play"><i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="artist-card reveal">
+        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&q=80" alt="Sana Bollywood Nights">
+        <div class="artist-overlay">
+          <h3>Sana Nights</h3>
+          <span>Bollywood · Playback</span>
+          <div class="artist-followers"><i class="fa-solid fa-user-group"></i> 4.5M Followers</div>
+        </div>
+        <div class="artist-play"><i class="fa-solid fa-play"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. GENRES EXPLORER -->
+<section class="genres section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Explore by Sound</span>
+      <h2>Browse Every Genre</h2>
+      <p>Find artists by the sound you love — there's a scene for everyone on BeatFlow.</p>
+    </div>
+    <div class="genre-grid">
+      <div class="genre-card reveal"><i class="fa-solid fa-bolt"></i><span>Electronic</span></div>
+      <div class="genre-card reveal"><i class="fa-solid fa-record-vinyl"></i><span>Hip-Hop</span></div>
+      <div class="genre-card reveal"><i class="fa-solid fa-guitar"></i><span>Indie & Folk</span></div>
+      <div class="genre-card reveal"><i class="fa-solid fa-music"></i><span>Classical</span></div>
+      <div class="genre-card reveal"><i class="fa-solid fa-film"></i><span>Bollywood</span></div>
+      <div class="genre-card reveal"><i class="fa-solid fa-fire"></i><span>EDM</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. TRENDING TRACKS / CHARTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">This Week's Chart</span>
+      <h2>Trending Tracks</h2>
+      <p>The most-streamed songs on BeatFlow right now.</p>
+    </div>
+    <div class="chart-list">
+      <div class="chart-row reveal">
+        <div class="chart-rank">01</div>
+        <div class="chart-art"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=120&q=80" alt="Track"></div>
+        <div class="chart-info"><h5>Midnight Pulse</h5><span>Aryan Beats</span></div>
+        <div class="chart-plays"><i class="fa-solid fa-headphones"></i> 8.4M plays</div>
+      </div>
+      <div class="chart-row reveal">
+        <div class="chart-rank">02</div>
+        <div class="chart-art"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=120&q=80" alt="Track"></div>
+        <div class="chart-info"><h5>Kahaani</h5><span>Sana Nights</span></div>
+        <div class="chart-plays"><i class="fa-solid fa-headphones"></i> 7.1M plays</div>
+      </div>
+      <div class="chart-row reveal">
+        <div class="chart-rank">03</div>
+        <div class="chart-art"><img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=120&q=80" alt="Track"></div>
+        <div class="chart-info"><h5>Streetlight Cipher</h5><span>Vikram Raps</span></div>
+        <div class="chart-plays"><i class="fa-solid fa-headphones"></i> 6.5M plays</div>
+      </div>
+      <div class="chart-row reveal">
+        <div class="chart-rank">04</div>
+        <div class="chart-art"><img src="https://images.unsplash.com/photo-1571266028243-d220c6a3fc84?w=120&q=80" alt="Track"></div>
+        <div class="chart-info"><h5>Storm Drop</h5><span>DJ Karan Storm</span></div>
+        <div class="chart-plays"><i class="fa-solid fa-headphones"></i> 5.9M plays</div>
+      </div>
+      <div class="chart-row reveal">
+        <div class="chart-rank">05</div>
+        <div class="chart-art"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=120&q=80" alt="Track"></div>
+        <div class="chart-info"><h5>Quiet Roads</h5><span>Priya Melodics</span></div>
+        <div class="chart-plays"><i class="fa-solid fa-headphones"></i> 4.3M plays</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. ARTIST SPOTLIGHT -->
+<section class="spotlight section">
+  <div class="container">
+    <div class="section-head reveal" style="color:#fff">
+      <span class="eyebrow">Artist of the Month</span>
+      <h2 style="color:#fff">In the Spotlight</h2>
+    </div>
+    <div class="spotlight-grid reveal">
+      <div class="spotlight-img">
+        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=700&q=80" alt="Sana Nights">
+        <div class="spotlight-badge">Artist of the Month</div>
+      </div>
+      <div class="spotlight-text">
+        <h3>SANA NIGHTS</h3>
+        <span>Bollywood · Playback Singer</span>
+        <p>From singing covers in her bedroom to topping BeatFlow's national chart with "Kahaani" — Sana's journey is proof that talent plus the right platform can change everything. This month she headlines our spotlight with a brand new single and an exclusive behind-the-scenes documentary.</p>
+        <div class="spotlight-stats">
+          <div><h4>4.5M</h4><span>Followers</span></div>
+          <div><h4>62M</h4><span>Total Streams</span></div>
+          <div><h4>18</h4><span>Released Tracks</span></div>
+        </div>
+        <a href="#" class="btn btn-red btn-sm">Listen Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. SUCCESS STORIES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Real Journeys</span>
+      <h2>Artist Success Stories</h2>
+      <p>How BeatFlow helped independent artists turn passion into a career.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="test-text">"BeatFlow completely changed how I connect with my fans. The analytics alone are worth it — I finally understand who's listening and where."</p>
+        <div class="test-author">
+          <div class="test-avatar">A</div>
+          <div><div class="test-name">Aryan Verma</div><div class="test-role">Independent Artist · Mumbai</div></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="test-text">"I went from 200 monthly listeners to over a million in eight months. The royalty payouts landed exactly when promised, every single time."</p>
+        <div class="test-author">
+          <div class="test-avatar">P</div>
+          <div><div class="test-name">Priya Krishnan</div><div class="test-role">Indie Singer-Songwriter · Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="test-text">"As a producer I needed analytics and royalties in one place. BeatFlow gave me both, plus a merch store I built in an afternoon."</p>
+        <div class="test-author">
+          <div class="test-avatar">K</div>
+          <div><div class="test-name">Karan Joshi</div><div class="test-role">Electronic Producer · Delhi</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. JOIN AS ARTIST BENEFITS -->
+<section class="section" style="background:#f7f8fc">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">For Artists</span>
+      <h2>Why Artists Choose BeatFlow</h2>
+      <p>Everything you need to grow your career, minus the label and the red tape.</p>
+    </div>
+    <div class="join-grid">
+      <div class="join-card reveal">
+        <i class="fa-solid fa-coins"></i>
+        <h4>Keep 80% Revenue</h4>
+        <p>The highest royalty share in the industry, paid out automatically every month.</p>
+      </div>
+      <div class="join-card reveal">
+        <i class="fa-solid fa-chart-line"></i>
+        <h4>Real-Time Analytics</h4>
+        <p>Know exactly who's listening, where, and how your fanbase is growing.</p>
+      </div>
+      <div class="join-card reveal">
+        <i class="fa-solid fa-bullhorn"></i>
+        <h4>Built-In Promotion</h4>
+        <p>Get featured in charts, playlists, and the homepage spotlight for free.</p>
+      </div>
+      <div class="join-card reveal">
+        <i class="fa-solid fa-headset"></i>
+        <h4>24/7 Artist Support</h4>
+        <p>A dedicated team of music lovers ready to help, day or night.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 + 10. CTA -->
+<section class="video-cta">
+  <div class="container">
+    <span class="eyebrow">Your Turn</span>
+    <h2>YOUR MUSIC DESERVES TO BE HEARD</h2>
+    <p>Thousands of artists have already taken the stage. Your moment is waiting — launch your BeatFlow profile in minutes.</p>
+    <div class="hero-btns">
+      <a href="signup.html" class="btn btn-red"><i class="fa-solid fa-rocket"></i> Launch Your Profile</a>
+      <a href="contact.html" class="btn btn-outline">Talk to Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+       </a>
+        <p>India's premier music & entertainment platform. Empowering artists, connecting fans, and fueling the next generation of live experiences since 2020.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-spotify"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="services.html">Music Streaming</a></li>
+          <li><a href="services.html">Live Events</a></li>
+          <li><a href="services.html">Artist Tools</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Artist FAQ</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BeatFlow Entertainment Pvt. Ltd. All rights reserved.</span>
+      <span>Made with <i class="fa-solid fa-heart" style="color:#e63946"></i> for Music Lovers</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+document.getElementById('burgerBtn').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+function animateCounter(el){
+  const target = parseInt(el.dataset.target);
+  let current = 0;
+  const inc = target / 60;
+  const timer = setInterval(() => {
+    current += inc;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current).toLocaleString();
+  }, 30);
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      const counter = entry.target.querySelector('.stat-num');
+      if (counter && !counter.dataset.animated) { counter.dataset.animated = true; animateCounter(counter); }
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const statsSection = document.querySelector('.stats');
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat-num').forEach(el => {
+        if (!el.dataset.animated) { el.dataset.animated = true; animateCounter(el); }
+      });
+    }
+  });
+}, { threshold: 0.2 });
+if (statsSection) statsObserver.observe(statsSection);
+</script>
+</body>
+</html>
