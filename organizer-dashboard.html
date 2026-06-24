@@ -104,29 +104,29 @@ tr:hover td{background:#fafbfc}
   <div class="sb-head">
     <div class="sb-logo">
       <a href="index.html" class="logo">
-        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        <img src="./gallery/stackly-music.webp" alt="STACKLY Logo" />
       </a>
     </div>
   </div>
   <div class="sb-user">
     <div class="sb-role-badge"><i class="fa-solid fa-calendar-check"></i> <span>Organizer</span></div>
     <div class="sb-username" id="sidebarName">Event Organizer</div>
-    <div class="sb-email" id="sidebarEmail">organizer@beatflow.in</div>
+    <div class="sb-email" id="sidebarEmail">organizer@stackly.in</div>
   </div>
   <nav class="sb-nav">
     <div class="sb-section">Events</div>
-    <button class="sb-link active"><i class="fa-solid fa-chart-pie"></i><span>Overview</span></button>
-    <button class="sb-link"><i class="fa-solid fa-calendar-plus"></i><span>Create Event</span></button>
-    <button class="sb-link"><i class="fa-solid fa-calendar"></i><span>My Events</span></button>
-    <button class="sb-link"><i class="fa-solid fa-ticket"></i><span>Ticket Sales</span></button>
+    <a href="404.html" class="sb-link active"><i class="fa-solid fa-chart-pie"></i><span>Overview</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-calendar-plus"></i><span>Create Event</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-calendar"></i><span>My Events</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-ticket"></i><span>Ticket Sales</span></a>
     <div class="sb-section">Management</div>
-    <button class="sb-link"><i class="fa-solid fa-users"></i><span>Attendees</span></button>
-    <button class="sb-link"><i class="fa-solid fa-microphone"></i><span>Book Artists</span></button>
-    <button class="sb-link"><i class="fa-solid fa-indian-rupee-sign"></i><span>Revenue</span></button>
-    <button class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></button>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-users"></i><span>Attendees</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-microphone"></i><span>Book Artists</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-indian-rupee-sign"></i><span>Revenue</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a>
     <div class="sb-section">Account</div>
-    <button class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
-    <button class="sb-link logout-btn" onclick="window.location.href='login.html'"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    <a  class="sb-link logout-btn" onclick="window.location.href='login.html'"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
   </nav>
   <div class="sb-footer">
     <button class="sb-toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i><span>Collapse</span></button>
@@ -157,7 +157,7 @@ tr:hover td{background:#fafbfc}
       </div>
       <div class="wb-meta">
         <div class="wb-badge"><i class="fa-solid fa-calendar-check"></i> Organizer</div>
-        <span id="wbEmail" style="font-size:13px;opacity:.8">organizer@beatflow.in</span>
+        <span id="wbEmail" style="font-size:13px;opacity:.8">organizer@stackly.in</span>
         <strong id="wbDate" style="color:#ffd166"></strong>
       </div>
     </div>
@@ -238,6 +238,16 @@ function updateTime() { document.getElementById('topbarTime').textContent = new 
 updateTime(); setInterval(updateTime, 1000);
 document.getElementById('sidebarToggle').addEventListener('click', () => { document.getElementById('sidebar').classList.toggle('collapsed'); document.getElementById('mainContent').classList.toggle('expanded'); });
 document.getElementById('mobileBurger').addEventListener('click', () => { document.getElementById('sidebar').classList.toggle('mob-open'); });
+
+document.addEventListener('click', function(e) {
+  if (
+    sidebar.classList.contains('mob-open') &&
+    !sidebar.contains(e.target) &&
+    !document.getElementById('mobileBurger').contains(e.target)
+  ) {
+    sidebar.classList.remove('mob-open');
+  }
+});
 
 new Chart(document.getElementById('ticketChart').getContext('2d'), {
   type: 'bar',

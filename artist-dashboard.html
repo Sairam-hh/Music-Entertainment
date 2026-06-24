@@ -104,28 +104,28 @@ a{text-decoration:none;color:inherit}
   <div class="sb-head">
     <div class="sb-logo">
       <a href="index.html" class="logo">
-        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        <img src="./gallery/stackly-music.webp" alt="STACKLY Logo" />
         </a>
     </div>
   </div>
   <div class="sb-user">
     <div class="sb-role-badge"><i class="fa-solid fa-microphone"></i> <span>Artist</span></div>
     <div class="sb-username" id="sidebarName">Artist Profile</div>
-    <div class="sb-email" id="sidebarEmail">artist@beatflow.in</div>
+    <div class="sb-email" id="sidebarEmail">artist@stackly.in</div>
   </div>
   <nav class="sb-nav">
     <div class="sb-section">My Music</div>
-    <button class="sb-link active"><i class="fa-solid fa-chart-pie"></i><span>Overview</span></button>
-    <button class="sb-link"><i class="fa-solid fa-music"></i><span>My Tracks</span></button>
-    <button class="sb-link"><i class="fa-solid fa-cloud-upload-alt"></i><span>Upload Music</span></button>
-    <button class="sb-link"><i class="fa-solid fa-compact-disc"></i><span>Albums</span></button>
+    <a href="404.html" class="sb-link active"><i class="fa-solid fa-chart-pie"></i><span>Overview</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-music"></i><span>My Tracks</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-cloud-upload-alt"></i><span>Upload Music</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-compact-disc"></i><span>Albums</span></a>
     <div class="sb-section">Growth</div>
-    <button class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></button>
-    <button class="sb-link"><i class="fa-solid fa-users"></i><span>Fans</span></button>
-    <button class="sb-link"><i class="fa-solid fa-indian-rupee-sign"></i><span>Royalties</span></button>
-    <button class="sb-link"><i class="fa-solid fa-store"></i><span>My Store</span></button>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-users"></i><span>Fans</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-indian-rupee-sign"></i><span>Royalties</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-store"></i><span>My Store</span></a>
     <div class="sb-section">Account</div>
-    <button class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
     <button class="sb-link logout-btn" onclick="window.location.href='login.html'"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
   </nav>
   <div class="sb-footer">
@@ -258,6 +258,15 @@ document.getElementById('sidebarToggle').addEventListener('click', () => {
   document.getElementById('mainContent').classList.toggle('expanded');
 });
 document.getElementById('mobileBurger').addEventListener('click', () => { document.getElementById('sidebar').classList.toggle('mob-open'); });
+document.addEventListener('click', function(e) {
+  if (
+    sidebar.classList.contains('mob-open') &&
+    !sidebar.contains(e.target) &&
+    !document.getElementById('mobileBurger').contains(e.target)
+  ) {
+    sidebar.classList.remove('mob-open');
+  }
+});
 
 new Chart(document.getElementById('streamChart').getContext('2d'), {
   type: 'line',

@@ -99,7 +99,7 @@ a{text-decoration:none;color:inherit}
     </video>
     <div class="left-overlay"></div>
     <a href="index.html" class="logo">
-        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        <img src="./gallery/stackly-music.webp" alt="STACKLY Logo" />
     </a>
     <div class="left-content">
       <br> <br>
@@ -151,7 +151,8 @@ a{text-decoration:none;color:inherit}
             <label>First Name</label>
             <div class="input-wrap">
               <i class="fa-solid fa-user icon-left"></i>
-              <input type="text" id="firstName" placeholder="Aryan">
+              <input type="text" id="firstName" placeholder="Aryan"
+              oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')">
             </div>
             <div class="err-msg" id="firstNameErr"><i class="fa-solid fa-circle-exclamation"></i> Required</div>
           </div>
@@ -159,7 +160,8 @@ a{text-decoration:none;color:inherit}
             <label>Last Name</label>
             <div class="input-wrap">
               <i class="fa-solid fa-user icon-left"></i>
-              <input type="text" id="lastName" placeholder="Verma">
+              <input type="text" id="lastName" placeholder="Verma"
+               oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')">
             </div>
             <div class="err-msg" id="lastNameErr"><i class="fa-solid fa-circle-exclamation"></i> Required</div>
           </div>
@@ -180,8 +182,8 @@ a{text-decoration:none;color:inherit}
             <i class="fa-solid fa-phone icon-left"></i>
             <input type="tel" id="phone" placeholder="+91 98765 43210">
           </div>
-          <div class="err-msg" id="phoneErr"><i class="fa-solid fa-circle-exclamation"></i> Enter a valid phone</div>
-        </div>
+         <div class="err-msg" id="phoneErr"><i class="fa-solid fa-circle-exclamation"></i> Enter a valid 10-digit phone number</div>       
+         </div>
 
         <div class="form-group">
           <label>Select Your Role</label>
@@ -223,7 +225,7 @@ a{text-decoration:none;color:inherit}
 
         <div class="terms-row">
           <input type="checkbox" id="terms">
-          <label for="terms">I agree to BeatFlow's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+          <label for="terms">I agree to BeatFlow's <a href="404.html">Terms of Service</a> and <a href="404.html">Privacy Policy</a></label>
         </div>
 
         <button type="submit" class="btn-primary" id="signupBtn">
@@ -279,6 +281,16 @@ roleOptions.querySelectorAll('li').forEach(li => {
   });
 });
 
+
+document.getElementById('firstName').addEventListener('input', function() {
+  this.value = this.value.replace(/[^A-Za-z ]/g, '');
+});
+
+document.getElementById('lastName').addEventListener('input', function() {
+  this.value = this.value.replace(/[^A-Za-z ]/g, '');
+});
+
+
 // Form submit
 document.getElementById('signupForm').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -286,9 +298,10 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
 
   const fields = {
     firstName: { el: document.getElementById('firstName'), err: 'firstNameErr', check: v => v.trim().length >= 2 },
+    
     lastName: { el: document.getElementById('lastName'), err: 'lastNameErr', check: v => v.trim().length >= 2 },
     email: { el: document.getElementById('email'), err: 'emailErr', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
-    phone: { el: document.getElementById('phone'), err: 'phoneErr', check: v => v.trim().length >= 8 },
+    phone: { el: document.getElementById('phone'),err: 'phoneErr',check: v => /^[6-9]\d{9}$/.test(v.trim())},
     password: { el: document.getElementById('password'), err: 'passwordErr', check: v => v.length >= 8 },
     confirmPassword: { el: document.getElementById('confirmPassword'), err: 'confirmPasswordErr', check: v => v === document.getElementById('password').value }
   };
@@ -343,7 +356,7 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
         organizer: 'organizer-dashboard.html',
         fan: 'fan-dashboard.html'
       };
-      window.location.href = dashMap[selectedRole] || 'admin-dashboard.html';
+      window.location.href = 'login.html';
     }, 1200);
   }, 1800);
 });

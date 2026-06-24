@@ -122,7 +122,7 @@ tr:hover td{background:#fafbfc}
   <div class="sb-head">
     <div class="sb-logo">
       <a href="index.html" class="logo">
-        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        <img src="./gallery/stackly-music.webp" alt="STACKLY Logo" />
         </a>
     </div>
   </div>
@@ -133,17 +133,17 @@ tr:hover td{background:#fafbfc}
   </div>
   <nav class="sb-nav">
     <div class="sb-section">Main</div>
-    <button class="sb-link active"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></button>
-    <button class="sb-link"><i class="fa-solid fa-users"></i><span>Users</span></button>
-    <button class="sb-link"><i class="fa-solid fa-microphone"></i><span>Artists</span></button>
-    <button class="sb-link"><i class="fa-solid fa-calendar"></i><span>Events</span></button>
+    <a href="404.html" class="sb-link active"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-users"></i><span>Users</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-microphone"></i><span>Artists</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-calendar"></i><span>Events</span></a>
     <div class="sb-section">Revenue</div>
-    <button class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></button>
-    <button class="sb-link"><i class="fa-solid fa-indian-rupee-sign"></i><span>Payments</span></button>
-    <button class="sb-link"><i class="fa-solid fa-music"></i><span>Music Library</span></button>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-indian-rupee-sign"></i><span>Payments</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-music"></i><span>Music Library</span></a>
     <div class="sb-section">System</div>
-    <button class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
-    <button class="sb-link"><i class="fa-solid fa-bell"></i><span>Notifications</span></button>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    <a href="404.html" class="sb-link"><i class="fa-solid fa-bell"></i><span>Notifications</span></a>
     <button class="sb-link logout-btn" onclick="window.location.href='login.html'"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
   </nav>
   <div class="sb-footer">
@@ -285,6 +285,16 @@ document.getElementById('sidebarToggle').addEventListener('click', () => {
 });
 document.getElementById('mobileBurger').addEventListener('click', () => {
   sidebar.classList.toggle('mob-open');
+});
+
+document.addEventListener('click', function(e) {
+  if (
+    sidebar.classList.contains('mob-open') &&
+    !sidebar.contains(e.target) &&
+    !document.getElementById('mobileBurger').contains(e.target)
+  ) {
+    sidebar.classList.remove('mob-open');
+  }
 });
 
 // Revenue Chart

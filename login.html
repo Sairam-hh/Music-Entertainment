@@ -125,7 +125,7 @@ a{text-decoration:none;color:inherit}
     </video>
     <div class="left-overlay"></div>
     <a href="index.html" class="logo">
-        <img src="./gallery/stackly-music.png" alt="STACKLY Logo" />
+        <img src="./gallery/stackly-music.webp" alt="STACKLY Logo" />
         </a>
     <div class="left-content">
       <br> <br>
@@ -201,14 +201,14 @@ a{text-decoration:none;color:inherit}
             <input type="password" id="password" placeholder="Your password" autocomplete="current-password">
             <i class="fa-solid fa-eye toggle-pw" id="togglePw"></i>
           </div>
-          <div class="err-msg" id="passwordErr"><i class="fa-solid fa-circle-exclamation"></i> Password must be at least 6 characters</div>
+          <div class="err-msg" id="passwordErr"><i class="fa-solid fa-circle-exclamation"></i> Password must be at least 8 characters</div>
         </div>
 
         <div class="form-row">
           <label class="remember">
             <input type="checkbox" id="rememberMe"> Remember me
           </label>
-          <a href="#" class="forgot">Forgot password?</a>
+          <a href="404.html" class="forgot">Forgot password?</a>
         </div>
 
         <button type="submit" class="btn-primary" id="loginBtn">
@@ -289,7 +289,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   } else { email.classList.add('success'); }
 
   // Password
-  if (!password.value || password.value.length < 6) {
+  if (!password.value || password.value.length <= 8) {
     password.classList.add('error');
     document.getElementById('passwordErr').classList.add('show');
     valid = false;
