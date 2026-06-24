@@ -78,9 +78,31 @@ a{text-decoration:none;color:inherit}
 .spinner{display:inline-block;width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 .login-link{text-align:center;font-size:14px;color:#5a6a85;margin-top:16px}
 .login-link a{color:#e63946;font-weight:600}
-.form-back{display:flex;justify-content:flex-start;margin-bottom:18px}
-.form-back a{display:flex;align-items:center;gap:8px;color:#0d0d1a;font-size:13px;font-weight:600;background:#fff;padding:9px 16px;border-radius:30px;border:1px solid #e2e8f0;transition:.3s}
-.form-back a:hover{background:#0d0d1a;color:#e63946}
+.form-back{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:9999;
+}
+
+.form-back a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#fff;
+    color:#0d0d1a;
+    padding:10px 16px;
+    border-radius:30px;
+    border:1px solid #e2e8f0;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    font-size:13px;
+    font-weight:600;
+}
+
+.form-back a:hover{
+    background:#0d0d1a;
+    color:#e63946;
+}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:900px){.page{grid-template-columns:1fr}.left-panel{display:none}.right-panel{padding:40px 28px;justify-content:flex-start;padding-top:80px}body{overflow-y:auto;height:auto}}
@@ -99,7 +121,7 @@ a{text-decoration:none;color:inherit}
     </video>
     <div class="left-overlay"></div>
     <a href="index.html" class="logo">
-        <img src="./gallery/stackly-music.webp" alt="STACKLY Logo" />
+        <img src="./gallery/stackly-music-red.webp" alt="STACKLY Logo" />
     </a>
     <div class="left-content">
       <br> <br>
@@ -122,18 +144,21 @@ a{text-decoration:none;color:inherit}
       </div>
     </div>
     <div class="left-bottom">© 2026 BeatFlow Entertainment Pvt. Ltd.</div>
-  </div>
+  </div> 
+
 
   <!-- RIGHT -->
+   
   <div class="right-panel">
     <div class="form-card">
-      <div class="form-back">
+      <div class="form-back"> 
         <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
       </div>
       <div class="form-header">
         <div class="icon-ring"><i class="fa-solid fa-user-plus"></i></div>
+        <br>
         <h3>Create Account</h3>
-        <p>Join 12M+ users on BeatFlow — it's free forever</p>
+        <p>Join 12M+ users on stackly — it's free forever</p>
       </div>
 
       <div class="alert alert-error" id="alertError">

@@ -81,7 +81,8 @@ a{text-decoration:none;color:inherit}
 .btn-red{background:linear-gradient(135deg,#e63946,#ff006e);color:#fff}
 .btn-red:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(230,57,70,.45)}
 .btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.25);padding:13px 26px}
-.btn-outline:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.5);transform:translateY(-2px)}
+.btn-outline:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.5);transform:translateY(-2px);background:#ff006e}
+
 
 /* QUICK LINKS */
 .quick-links{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
@@ -149,11 +150,7 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <!-- WAVEFORM -->
-<div class="waveform">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,40 Q30,10 60,40 Q90,70 120,40 Q150,10 180,40 Q210,70 240,40 Q270,10 300,40 Q330,70 360,40 Q390,10 420,40 Q450,70 480,40 Q510,10 540,40 Q570,70 600,40 Q630,10 660,40 Q690,70 720,40 Q750,10 780,40 Q810,70 840,40 Q870,10 900,40 Q930,70 960,40 Q990,10 1020,40 Q1050,70 1080,40 Q1110,10 1140,40 Q1170,70 1200,40 Q1230,10 1260,40 Q1290,70 1320,40 Q1350,10 1380,40 Q1410,70 1440,40 L1440,80 L0,80 Z" fill="#e63946"/>
-  </svg>
-</div>
+
 
 <!-- NAV -->
 <nav class="nav">
@@ -170,28 +167,7 @@ a{text-decoration:none;color:inherit}
 <main class="main">
   <div class="content">
 
-    <!-- VINYL -->
-    <div class="vinyl-wrap">
-      <div class="vinyl playing">
-        <div class="vinyl-grooves"></div>
-      </div>
-      <svg class="needle" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="42" cy="8" r="6" fill="#e63946" stroke="#fff" stroke-width="1.5"/>
-        <line x1="42" y1="14" x2="18" y2="46" stroke="#c0c8d5" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="18" cy="46" r="3" fill="#7a8aa5"/>
-      </svg>
-    </div>
-
-    <!-- EQ BARS -->
-    <div class="eq-bars">
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-    </div>
+    
 
     <!-- GLITCH 404 -->
     <div class="glitch-wrap">
@@ -210,48 +186,25 @@ a{text-decoration:none;color:inherit}
     <h2 class="headline">Oops! This Page<br>Has <span>Left the Stage</span></h2>
     <p class="sub">Looks like the page you're looking for has dropped the mic and walked off. It might have been moved, deleted, or perhaps it never existed in the first place.</p>
 
-    <!-- SEARCH -->
-    <!-- <div class="search-wrap">
-      <input type="text" placeholder="Search for artists, songs, events…" id="searchInput">
-      <button onclick="handleSearch()"><i class="fa-solid fa-search"></i></button>
-    </div> -->
+    
 
     <!-- BUTTONS -->
     <div class="btn-group">
       <a href="index.html" class="btn btn-red">
         <i class="fa-solid fa-house"></i> Back to Home
       </a>
-      <a href="events.html" class="btn btn-outline">
-        <i class="fa-solid fa-calendar"></i> Explore Events
+      <a href="javascript:history.back()" class="btn btn-outline">
+         ← Go Back
       </a>
-      <a href="contact.html" class="btn btn-outline">
-        <i class="fa-solid fa-headset"></i> Get Help
-      </a>
+      
     </div>
 
-    <!-- QUICK LINKS -->
-    <div class="quick-links">
-      <span class="ql-label">QUICK LINKS:</span>
-      <a href="services.html" class="ql-item"><i class="fa-solid fa-record-vinyl"></i> Services</a>
-      <a href="pricing.html" class="ql-item"><i class="fa-solid fa-tag"></i> Pricing</a>
-      <a href="about.html" class="ql-item"><i class="fa-solid fa-users"></i> About Us</a>
-      <a href="login.html" class="ql-item"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
-      <a href="signup.html" class="ql-item"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
-    </div>
+    
 
   </div>
 </main>
 
-<!-- FOOTER STRIP -->
-<div class="footer-strip">
-  <span>© 2026 BeatFlow Entertainment Pvt. Ltd.</span>
-  <span style="margin:0 8px;opacity:.3">·</span>
-  <a href="index.html">Home</a>
-  <span style="margin:0 8px;opacity:.3">·</span>
-  <a href="contact.html">Support</a>
-  <span style="margin:0 8px;opacity:.3">·</span>
-  <a href="#">Privacy Policy</a>
-</div>
+
 
 <script>
 
