@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Organizer Dashboard — BeatFlow</title>
+<title>Organizer Dashboard — Stackly</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{overflow-x:hidden}
-body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#f0f2f8;display:flex;min-height:100vh}
+body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#f0f2f8;display:flex;min-height:100vh;overflow-x:hidden}
 h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.5px}
 a{text-decoration:none;color:inherit}
 .sidebar{width:260px;height:100vh;background:#0d0d1a;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200;transition:.35s;overflow:hidden}
@@ -41,7 +41,7 @@ a{text-decoration:none;color:inherit}
 .sb-toggle{background:none;border:1px solid rgba(255,255,255,.12);color:#a3b0c5;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px;transition:.2s}
 .sb-toggle:hover{background:rgba(255,255,255,.06);color:#fff}
 .sidebar.collapsed .sb-toggle span{display:none}
-.main{margin-left:260px;flex:1;min-height:100vh;transition:.35s;display:flex;flex-direction:column}
+.main{margin-left:260px;flex:1;min-height:100vh;transition:.35s;display:flex;flex-direction:column;min-width:0}
 .main.expanded{margin-left:72px}
 .topbar{background:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e8ecf4;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(10,10,26,.05)}
 .topbar-left{display:flex;align-items:center;gap:16px}
@@ -54,7 +54,7 @@ a{text-decoration:none;color:inherit}
 .notif-btn:hover{background:#f0f2f8}
 .notif-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;background:#e63946;border-radius:50%;border:2px solid #fff}
 .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e63946,#ff006e);display:grid;place-items:center;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
-.content{padding:28px;flex:1}
+.content{padding:28px;flex:1;min-width:0}
 .welcome-banner{background:linear-gradient(135deg,#0d0d1a,#3a86ff);color:#fff;border-radius:18px;padding:26px 32px;margin-bottom:26px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
 .welcome-banner::before{content:'';position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
 .wb-text h3{font-size:28px;margin-bottom:6px}
@@ -219,7 +219,7 @@ tr:hover td{background:#fafbfc}
           <tbody>
             <tr><td><strong>Sunburn Festival 2026</strong></td><td>Jul 15, 2026</td><td>Pune</td><td>4,200 / 5,000</td><td>₹62.9L</td><td><span class="badge badge-green">On Sale</span></td></tr>
             <tr><td><strong>NH7 Weekender HYD</strong></td><td>Aug 02, 2026</td><td>Hyderabad</td><td>2,800 / 3,500</td><td>₹64.4L</td><td><span class="badge badge-green">On Sale</span></td></tr>
-            <tr><td><strong>BeatFlow Underground</strong></td><td>Aug 20, 2026</td><td>Bengaluru</td><td>1,100 / 2,000</td><td>₹8.8L</td><td><span class="badge badge-blue">Upcoming</span></td></tr>
+            <tr><td><strong>Stackly Underground</strong></td><td>Aug 20, 2026</td><td>Bengaluru</td><td>1,100 / 2,000</td><td>₹8.8L</td><td><span class="badge badge-blue">Upcoming</span></td></tr>
             <tr><td><strong>Classical Fusion Night</strong></td><td>Sep 05, 2026</td><td>Chennai</td><td>420 / 800</td><td>₹8.4L</td><td><span class="badge badge-orange">Planning</span></td></tr>
           </tbody>
         </table>

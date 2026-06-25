@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fan Dashboard — BeatFlow</title>
+<title>Fan Dashboard — Stackly</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{overflow-x:hidden}
-body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#f0f2f8;display:flex;min-height:100vh}
+body{font-family:'Inter',sans-serif;color:#0d0d1a;background:#f0f2f8;display:flex;min-height:100vh;overflow-x:hidden}
 h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.5px}
 a{text-decoration:none;color:inherit}
 .sidebar{width:260px;height:100vh;background:#0d0d1a;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:200;transition:.35s;overflow:hidden}
@@ -41,7 +41,7 @@ a{text-decoration:none;color:inherit}
 .sb-toggle{background:none;border:1px solid rgba(255,255,255,.12);color:#a3b0c5;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px;transition:.2s}
 .sb-toggle:hover{background:rgba(255,255,255,.06);color:#fff}
 .sidebar.collapsed .sb-toggle span{display:none}
-.main{margin-left:260px;flex:1;min-height:100vh;transition:.35s;display:flex;flex-direction:column}
+.main{margin-left:260px;flex:1;min-height:100vh;transition:.35s;display:flex;flex-direction:column;min-width:0}
 .main.expanded{margin-left:72px}
 .topbar{background:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e8ecf4;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(10,10,26,.05)}
 .topbar-left{display:flex;align-items:center;gap:16px}
@@ -54,7 +54,7 @@ a{text-decoration:none;color:inherit}
 .notif-btn:hover{background:#f0f2f8}
 .notif-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;background:#e63946;border-radius:50%;border:2px solid #fff}
 .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e63946,#ff006e);display:grid;place-items:center;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
-.content{padding:28px;flex:1}
+.content{padding:28px;flex:1;min-width:0}
 .welcome-banner{background:linear-gradient(135deg,#8338ec,#e63946);color:#fff;border-radius:18px;padding:26px 32px;margin-bottom:26px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
 .welcome-banner::before{content:'';position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
 .wb-text h3{font-size:28px;margin-bottom:6px}
@@ -70,7 +70,7 @@ a{text-decoration:none;color:inherit}
 .sc-val{font-family:'Bebas Neue',sans-serif;font-size:36px;margin-bottom:4px;letter-spacing:1px}
 .sc-lbl{font-size:13px;color:#7a8aa5}
 .two-col{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:24px}
-.card{background:#fff;border-radius:14px;padding:22px;border:1px solid #e8ecf4}
+.card{background:#fff;border-radius:14px;padding:22px;border:1px solid #e8ecf4;min-width:0}
 .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .card-head h4{font-size:20px}
 .card-head span{font-size:12px;color:#7a8aa5}
@@ -94,21 +94,21 @@ a{text-decoration:none;color:inherit}
 .track-item:last-child{border-bottom:none}
 .track-num{width:22px;font-size:12px;color:#7a8aa5;text-align:center}
 .track-thumb{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;color:#fff;font-size:14px;flex-shrink:0}
-.track-info{flex:1}
-.track-info h5{font-size:13.5px;font-weight:600;margin-bottom:2px}
+.track-info{flex:1;min-width:0}
+.track-info h5{font-size:13.5px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .track-info span{font-size:12px;color:#7a8aa5}
-.track-dur{font-size:12.5px;color:#7a8aa5}
-.heart-btn{background:none;border:none;color:#e63946;font-size:15px;cursor:pointer;padding:4px}
+.track-dur{font-size:12.5px;color:#7a8aa5;flex-shrink:0}
+.heart-btn{background:none;border:none;color:#e63946;font-size:15px;cursor:pointer;padding:4px;flex-shrink:0}
 /* Upcoming tickets */
 .ticket-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #f0f2f8}
 .ticket-item:last-child{border-bottom:none}
 .ticket-date{width:50px;height:50px;background:linear-gradient(135deg,#e63946,#ff006e);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
 .ticket-date .day{font-family:'Bebas Neue',sans-serif;font-size:20px;line-height:1}
 .ticket-date .mon{font-size:10px;font-weight:600;text-transform:uppercase}
-.ticket-info{flex:1}
-.ticket-info h5{font-size:14px;font-weight:600;margin-bottom:3px}
+.ticket-info{flex:1;min-width:0}
+.ticket-info h5{font-size:14px;font-weight:600;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ticket-info span{font-size:12px;color:#7a8aa5;display:flex;align-items:center;gap:4px}
-.ticket-badge{background:#eafaf1;color:#27ae60;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.ticket-badge{background:#eafaf1;color:#27ae60;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;flex-shrink:0}
 @keyframes fadeCard{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @media(max-width:1100px){.cards-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
 @media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.mob-open{transform:none}.main{margin-left:0}.main.expanded{margin-left:0}.burger-main{display:block}}
@@ -176,7 +176,7 @@ a{text-decoration:none;color:inherit}
       </div>
       <div class="wb-meta">
         <div class="wb-badge"><i class="fa-solid fa-heart"></i> Fan</div>
-        <span id="wbEmail" style="font-size:13px;opacity:.8">fan@beatflow.in</span>
+        <span id="wbEmail" style="font-size:13px;opacity:.8">fan@Stackly.in</span>
         <strong id="wbDate" style="color:#ffd166"></strong>
       </div>
     </div>
@@ -295,7 +295,7 @@ a{text-decoration:none;color:inherit}
         <div class="ticket-item">
           <div class="ticket-date"><span class="day">20</span><span class="mon">Aug</span></div>
           <div class="ticket-info">
-            <h5>BeatFlow Underground</h5>
+            <h5>Stackly Underground</h5>
             <span><i class="fa-solid fa-location-dot"></i> Bengaluru</span>
           </div>
           <span class="ticket-badge">Confirmed</span>
